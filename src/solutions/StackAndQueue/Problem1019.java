@@ -3,6 +3,16 @@ package solutions.StackAndQueue;
 import java.util.Stack;
 
 public class Problem1019 {
+
+    private static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+        }
+    }
+
     public int[] nextLargerNodes(ListNode head) {
         Stack<Integer> asecData = new Stack<>();
         Stack<Integer> nextLarger = new Stack<>();
@@ -33,15 +43,6 @@ public class Problem1019 {
             --i;
         }
         return result;
-    }
-}
-
-class ListNode {
-    int val;
-    ListNode next;
-
-    ListNode(int x) {
-        val = x;
     }
 }
 
