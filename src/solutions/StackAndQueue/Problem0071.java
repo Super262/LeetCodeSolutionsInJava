@@ -3,52 +3,53 @@ package solutions.StackAndQueue;
 import java.util.Stack;
 
 public class Problem0071 {
-    public String simplifyPath(final String path) {
+    public String simplifyPath(String path) {
+        path = path + "/";
         StringBuilder result = new StringBuilder();
-        Stack<Character> temp = new Stack<>();
-        int len = path.length();
-        for(int i = 0; i < len; ++i){
-            if(temp.empty()){
-                temp.push(path.charAt(i));
-            }
-            else{
-                switch(path.charAt(i)){
-                    case '/':{
-                        if(temp.peek() != '/'){
-                            temp.push('/');
-                        }
-                        break;
+        Stack<Character> stack = new Stack<>();
+        int len = path.length(),  pointCount = 0, index = 0;
+        while(index < len){
+            char c = path.charAt(index);
+            if (c == '/') {
+                if (pointCount == 2) {
+                    // pop the first point, second point and the slash
+                    while(pointCount-- >= 0 && !stack.empty()){
+                        stack.pop();
                     }
-                    case '.':{
-                        if(i + 2 < len && path.charAt(i) == '.'
-                                && path.charAt(i + 1) == '.'
-                                && path.charAt(i + 2) == '.'){
-                            
-                        }
-                        if(i + 1 < len && path.charAt(i + 1) == '.'){
-                            ++i;
-                            temp.pop();
-                            while(!temp.empty() && temp.peek() != '/'){
-                                temp.pop();
-                            }
-                            if(temp.empty()){
-                                temp.push('/');
-                            }
-                        }
-                        break;
+                    while (!stack.empty() && stack.peek() != '/') {
+                        // pop the child directory
+                        stack.pop();
                     }
-                    default:{
-                        temp.push(path.charAt(i));
-                        break;
+                    pointCount = 0;
+                } else if (pointCount == 1) {
+                    // pop the first point and the slash
+                    while(pointCount-- >= 0 && !stack.empty()){
+                        stack.pop();
                     }
+                    pointCount = 0;
                 }
+                else{
+                    while (!stack.empty() && stack.peek() == '/') {
+                        stack.pop();
+                    }
+                    stack.push(c);
+                    ++index;
+                }
+            } else {
+                if (c == '.' && pointCount < 2) {
+                    pointCount++;
+                } else {
+                    pointCount = 0;
+                }
+                stack.push(c);
+                ++index;
             }
         }
-        if(temp.size() > 1 && temp.peek() == '/'){
-            temp.pop();
+        while(stack.size() > 1 && stack.peek() == '/'){
+            stack.pop();
         }
-        while(!temp.empty()){
-            result.insert(0, temp.pop());
+        while(!stack.empty()){
+            result.insert(0, stack.pop());
         }
         return result.toString();
     }
