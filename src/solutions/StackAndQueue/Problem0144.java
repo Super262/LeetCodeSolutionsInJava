@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Stack;
 
 public class Problem0144 {
-    public static class TreeNode {
+    private static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
