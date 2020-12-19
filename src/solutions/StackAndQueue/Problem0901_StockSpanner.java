@@ -3,9 +3,10 @@ package solutions.StackAndQueue;
 import java.util.Stack;
 
 public class Problem0901_StockSpanner {
-    // 将span的大小转化为当前价格距上一个更大的价格的天数
+    // 采用"最小栈"思想
 
-    private Stack<Integer> asecStack, spanStack;
+    private final Stack<Integer> asecStack;
+    private final Stack<Integer> spanStack;
 
     public Problem0901_StockSpanner() {
         asecStack = new Stack<>();
