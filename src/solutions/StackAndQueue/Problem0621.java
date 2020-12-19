@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Problem0621 {
     public int leastInterval(char[] tasks, int n) {
-        if(tasks.length == 0 || tasks.length == 1){
+        if(tasks.length == 0 || tasks.length == 1 || n == 0){
             return tasks.length;
         }
         else{
