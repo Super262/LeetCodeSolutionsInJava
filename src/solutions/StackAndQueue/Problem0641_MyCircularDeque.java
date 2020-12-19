@@ -2,8 +2,11 @@ package solutions.StackAndQueue;
 
 public class Problem0641_MyCircularDeque {
 
-    private int[] data;
-    private int capacity, headIndex, tailIndex, count;
+    private final int[] data;
+    private final int capacity;
+    private int headIndex;
+    private int tailIndex;
+    private int count;
 
     public Problem0641_MyCircularDeque(int k) {
         this.capacity = k;
