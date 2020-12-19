@@ -6,8 +6,8 @@ public class Problem0856 {
     public int scoreOfParentheses(String S) {
         Stack<Integer> scores = new Stack<>();
         int result = 0;
-        for(char c : S.toCharArray()){
-            if(c == '('){
+        for(int i = 0; i < S.length(); ++i){
+            if(S.charAt(i) == '('){
                 scores.push(0);
             }
             else{
