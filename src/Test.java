@@ -5,7 +5,6 @@ import solutions.StackAndQueue.Problem1541;
 
 public class Test {
     public static void main(String[] args){
-        Problem1541 p = new Problem1541();
-        System.out.println(p.minInsertions("(()))"));
+        
     }
 }
