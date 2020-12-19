@@ -3,27 +3,28 @@ package solutions.StackAndQueue;
 public class Problem0880 {
     public String decodeAtIndex(String S, int K) {
         long size = 0;
-        char[] strArray = S.toCharArray();
 
         // Find size = length of decoded string
-        for (char c : strArray) {
-            if (Character.isDigit(c))
-                size *= c - '0';
+        for (int i = 0; i < S.length(); ++i) {
+            char ch = S.charAt(i);
+            if (Character.isDigit(ch))
+                size *= ch - '0';
             else
                 size++;
         }
 
 
-        for(int i = strArray.length - 1; i >= 0; --i){
-            // This is quite tricky.
+        for(int i = S.length() - 1; i >= 0; --i){
 
+            // This is quite tricky.
             K %= size;
-            if(Character.isDigit(strArray[i])){
-                size /= (strArray[i] - '0');
+            char ch = S.charAt(i);
+            if(Character.isDigit(ch)){
+                size /= (ch - '0');
             }
             else{
                 if(K == 0){
-                    return String.valueOf(strArray[i]);
+                    return String.valueOf(ch);
                 }
                 // Decrease the size while move one step.
                 --size;
