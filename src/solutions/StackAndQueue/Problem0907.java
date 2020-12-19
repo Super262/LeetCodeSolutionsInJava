@@ -35,7 +35,7 @@ public class Problem0907 {
             temp.push(i);
         }
         for(int i = 0; i < A.length; ++i){
-            sum += A[i] * (rightLess[i] - i) * (i - leftLess[i]);
+            sum += (long) A[i] * (rightLess[i] - i) * (i - leftLess[i]);
         }
         return (int) (sum % base);
     }
