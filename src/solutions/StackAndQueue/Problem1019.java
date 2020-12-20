@@ -1,5 +1,6 @@
 package solutions.StackAndQueue;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class Problem1019 {
@@ -14,35 +15,22 @@ public class Problem1019 {
     }
 
     public int[] nextLargerNodes(ListNode head) {
-        Stack<Integer> asecData = new Stack<>();
-        Stack<Integer> nextLarger = new Stack<>();
+        Stack<ListNode> nodeStack = new Stack<>();
+        Stack<Integer> nodeIndexStack = new Stack<>();
+        ArrayList<Integer> result = new ArrayList<>();
         ListNode current = head;
         while(current != null){
-            Stack<Integer> tempLarger = new Stack<>();
-            while(!nextLarger.empty() && !asecData.empty() && asecData.peek() < current.val){
-                if(nextLarger.peek() == 0){
-                    asecData.pop();
-                    nextLarger.pop();
-                    tempLarger.push(current.val);
-                }
-                else{
-                    tempLarger.push(nextLarger.pop());
-                }
+            while(!nodeStack.empty() && nodeStack.peek().val < current.val){
+                nodeStack.pop();
+                result.set(nodeIndexStack.peek(), current.val);
+                nodeIndexStack.pop();
             }
-            while(!tempLarger.empty()){
-                nextLarger.push(tempLarger.pop());
-            }
-            asecData.push(current.val);
-            nextLarger.push(0);
+            nodeStack.push(current);
+            result.add(0);
+            nodeIndexStack.push(result.size() - 1);
             current = current.next;
         }
-        int[] result = new int[nextLarger.size()];
-        int i = result.length - 1;
-        while(!nextLarger.empty()){
-            result[i] = nextLarger.pop();
-            --i;
-        }
-        return result;
+        return result.stream().mapToInt(Integer::valueOf).toArray();
     }
 }
 
