@@ -1,48 +1,47 @@
 package solutions.StackAndQueue;
 
 import java.util.HashMap;
-import java.util.Stack;
 
 public class Problem1410 {
     public String entityParser(final String text) {
         HashMap<String, String> keywordSet = new HashMap<>();
-        Stack<Character> decodedData = new Stack<>();
         keywordSet.put("&gt;",">");
         keywordSet.put("&lt;","<");
         keywordSet.put("&amp;","&");
         keywordSet.put("&quot;","\"");
         keywordSet.put("&apos;", "'");
         keywordSet.put("&frasl;","/");
-        boolean startWithAmp = false;
+        StringBuilder result = new StringBuilder();
+        StringBuilder stack = new StringBuilder();
+        boolean needTestComer = false;
         for(int i = 0; i < text.length(); ++i){
-            char c = text.charAt(i);
-            if(c == ';' && startWithAmp){
-                StringBuilder temp = new StringBuilder(";");
-                while(!keywordSet.containsKey(temp.toString()) && !decodedData.empty() && temp.length() < 8){
-                    temp.insert(0, decodedData.pop());
-                }
-                if(keywordSet.containsKey(temp.toString())){
-                    for(char s : keywordSet.get(temp.toString()).toCharArray()){
-                        decodedData.push(s);
-                    }
-                }
-                else{
-                    for(char s : temp.toString().toCharArray()){
-                        decodedData.push(s);
-                    }
-                }
-                startWithAmp = false;
+            char ch = text.charAt(i);
+            if (ch == '&'){
+                needTestComer = true;
+                stack.append(ch);
             }
             else{
-                if(c == '&'){
-                    startWithAmp = true;
+                if (needTestComer){
+                    stack.append(ch);
+                    if (ch == ';'){
+                        String tempKey = stack.toString();
+                        if (keywordSet.containsKey(tempKey)){
+                            result.append(keywordSet.get(tempKey));
+                        }
+                        else{
+                            result.append(stack);
+                        }
+                        stack.setLength(0);
+                        needTestComer = false;
+                    }
                 }
-                decodedData.push(c);
+                else {
+                    result.append(ch);
+                }
             }
         }
-        StringBuilder result = new StringBuilder();
-        while(!decodedData.empty()){
-            result.insert(0 , decodedData.pop());
+        if(stack.length() != 0){
+            result.append(stack);
         }
         return result.toString();
     }
