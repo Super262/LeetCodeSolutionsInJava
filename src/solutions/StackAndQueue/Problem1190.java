@@ -11,29 +11,20 @@ public class Problem1190 {
         char[] strArray = s.toCharArray();
         StringBuilder result = new StringBuilder();
         for(char c : strArray){
-            switch(c){
-                case '(':{
-                    dataStack.push(c);
-                    break;
+            if (c == ')') {
+                while (dataStack.peek() != '(') {
+                    temp.add(dataStack.pop());
                 }
-                case ')':{
-                    while(dataStack.peek() != '('){
-                        temp.add(dataStack.pop());
-                    }
-                    dataStack.pop();
-                    while(!temp.isEmpty()){
-                        dataStack.push(temp.poll());
-                    }
-                    break;
+                dataStack.pop();
+                while (!temp.isEmpty()) {
+                    dataStack.push(temp.poll());
                 }
-                default :{
-                    dataStack.push(c);
-                    break;
-                }
+            } else {
+                dataStack.push(c);
             }
         }
         while(!dataStack.empty()){
-            result.insert(0, String.valueOf(dataStack.pop()));
+            result.insert(0,dataStack.pop());
         }
         return result.toString();
     }
