@@ -4,21 +4,17 @@ import java.util.Stack;
 
 public class Problem0946 {
     public boolean validateStackSequences(int[] pushed, int[] popped) {
-        Stack<Integer> temp = new Stack<>();
-        int i = 0, j = 0;
-        while(j < popped.length){
-            while(temp.empty() || temp.peek() != popped[j]){
-                if(i >= pushed.length){
-                    return false;
-                }
-                else{
-                    temp.push(pushed[i]);
-                    ++i;
-                }
+        Stack<Integer> tempStack = new Stack<>();
+        int pushedIt = 0;
+        int poppedIt = 0;
+        while (poppedIt != popped.length && pushedIt != pushed.length){
+            tempStack.push(pushed[pushedIt]);
+            ++pushedIt;
+            while (!tempStack.empty() && popped[poppedIt] == tempStack.peek()){
+                tempStack.pop();
+                ++poppedIt;
             }
-            temp.pop();
-            ++j;
         }
-        return temp.empty();
+        return poppedIt == popped.length && pushedIt == pushed.length && tempStack.empty();
     }
 }
