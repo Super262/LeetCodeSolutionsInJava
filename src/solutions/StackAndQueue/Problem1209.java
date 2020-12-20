@@ -3,7 +3,7 @@ package solutions.StackAndQueue;
 import java.util.Stack;
 
 public class Problem1209 {
-    public String removeDuplicates(String s, int k) {
+    public String removeDuplicates(String s, final int k) {
         Stack<Character> alphaStack = new Stack<>();
         Stack<Integer> countStack = new Stack<>();
         for(int i = 0; i < s.length(); ++i){
