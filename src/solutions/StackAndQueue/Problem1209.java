@@ -23,7 +23,7 @@ public class Problem1209 {
         }
         while (!elementStack.empty()){
             for(int i = 0; i < freqStack.peek(); ++i){
-                result.insert(0,String.valueOf(elementStack.peek()));
+                result.insert(0,elementStack.peek());
             }
             elementStack.pop();
             freqStack.pop();
