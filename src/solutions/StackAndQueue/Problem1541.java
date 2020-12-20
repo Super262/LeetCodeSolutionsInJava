@@ -1,6 +1,5 @@
 package solutions.StackAndQueue;
 
-import java.util.Stack;
 
 public class Problem1541 {
     public int minInsertions(String s) {
