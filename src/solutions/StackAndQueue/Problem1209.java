@@ -4,30 +4,33 @@ import java.util.Stack;
 
 public class Problem1209 {
     public String removeDuplicates(String s, int k) {
-        Stack<Character> elementStack = new Stack<>();
-        Stack<Integer> freqStack = new Stack<>();
-        char[] strArray = s.toCharArray();
-        StringBuilder result = new StringBuilder();
-        for(char c : strArray){
-            if(elementStack.empty() || elementStack.peek() != c){
-                elementStack.push(c);
-                freqStack.push(1);
+        Stack<Character> alphaStack = new Stack<>();
+        Stack<Integer> countStack = new Stack<>();
+        for(int i = 0; i < s.length(); ++i){
+            final char ch = s.charAt(i);
+            if(!alphaStack.empty() && alphaStack.peek() == ch){
+                countStack.push(countStack.pop() + 1);
             }
             else{
-                freqStack.push(freqStack.pop() + 1);
+                countStack.push(1);
+                alphaStack.push(ch);
             }
-            while(!elementStack.empty() && freqStack.peek() > k - 1){
-                elementStack.pop();
-                freqStack.pop();
+            while(!alphaStack.empty()){
+                if(countStack.peek() >= k){
+                    countStack.pop();
+                    alphaStack.pop();
+                }
+                else{
+                    break;
+                }
             }
         }
-        while (!elementStack.empty()){
-            for(int i = 0; i < freqStack.peek(); ++i){
-                result.insert(0,elementStack.peek());
-            }
-            elementStack.pop();
-            freqStack.pop();
+        StringBuilder stringBuilder = new StringBuilder();
+        while(!alphaStack.empty()){
+            final char ch = alphaStack.pop();
+            final int factor = countStack.pop();
+            stringBuilder.append(String.valueOf(ch).repeat(factor));
         }
-        return result.toString();
+        return stringBuilder.reverse().toString();
     }
 }
