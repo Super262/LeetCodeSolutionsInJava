@@ -5,7 +5,6 @@ import java.util.Stack;
 
 public class Problem1410 {
     public String entityParser(final String text) {
-        StringBuilder result = new StringBuilder();
         HashMap<String, String> keywordSet = new HashMap<>();
         Stack<Character> decodedData = new Stack<>();
         keywordSet.put("&gt;",">");
@@ -15,7 +14,8 @@ public class Problem1410 {
         keywordSet.put("&apos;", "'");
         keywordSet.put("&frasl;","/");
         boolean startWithAmp = false;
-        for(char c : text.toCharArray()){
+        for(int i = 0; i < text.length(); ++i){
+            char c = text.charAt(i);
             if(c == ';' && startWithAmp){
                 StringBuilder temp = new StringBuilder(";");
                 while(!keywordSet.containsKey(temp.toString()) && !decodedData.empty() && temp.length() < 8){
@@ -40,6 +40,7 @@ public class Problem1410 {
                 decodedData.push(c);
             }
         }
+        StringBuilder result = new StringBuilder();
         while(!decodedData.empty()){
             result.insert(0 , decodedData.pop());
         }
