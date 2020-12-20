@@ -4,26 +4,17 @@ import java.util.Stack;
 
 public class Problem0921 {
     public int minAddToMakeValid(String S) {
-        Stack<Character> temp = new Stack<>();
-        int remainder = 0;
-        for(char c : S.toCharArray()){
-            switch(c){
-                case '(':{
-                    temp.push(c);
-                    break;
-                }
-                case ')':{
-                    if(!temp.empty() && temp.peek() == '('){
-                        temp.pop();
-                    }
-                    else{
-                        ++remainder;
-                    }
-                    break;
-                }
+        final Stack<Character> stack = new Stack<>();
+        final int strLength = S.length();
+        for (int i = 0; i < strLength; ++i){
+            char ch = S.charAt(i);
+            if(!stack.empty() && ch == ')' && stack.peek() == '('){
+                stack.pop();
+            }
+            else{
+                stack.push(ch);
             }
         }
-        remainder += temp.size();
-        return remainder;
+        return stack.size();
     }
 }
