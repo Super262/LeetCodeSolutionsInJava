@@ -1,37 +1,35 @@
 package solutions.StackAndQueue;
 
-import java.util.Stack;
+import java.util.ArrayList;
 
 public class Problem1249 {
     public String minRemoveToMakeValid(String s) {
-        Stack<Integer> stack = new Stack<>();
-        boolean[] toBeRemoved = new boolean[s.length()];
-        StringBuilder str = new StringBuilder();
-        for(int i = 0; i < s.length(); ++i){
-            switch(s.charAt(i)){
+        ArrayList<Integer> stack = new ArrayList<>();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < s.length(); ++i){
+            switch (s.charAt(i)){
                 case '(':{
-                    stack.push(i);
+                    stack.add(i);
                     break;
                 }
                 case ')':{
-                    if(stack.empty()){
-                        toBeRemoved[i] = true;
+                    if (!stack.isEmpty() && s.charAt(stack.get(stack.size() - 1)) == '('){
+                        stack.remove(stack.size() - 1);
                     }
                     else{
-                        stack.pop();
+                        stack.add(i);
                     }
-                    break;
                 }
             }
         }
-        while(!stack.empty()){
-            toBeRemoved[stack.pop()] = true;
-        }
-        for(int i = 0; i < s.length(); ++i){
-            if(!toBeRemoved[i]){
-                str.append(s.charAt(i));
+        for (int i = 0; i < s.length(); ++i){
+            if (!stack.isEmpty() && i == stack.get(0)){
+                stack.remove(0);
+            }
+            else{
+                stringBuilder.append(s.charAt(i));
             }
         }
-        return  str.toString();
+        return  stringBuilder.toString();
     }
 }
