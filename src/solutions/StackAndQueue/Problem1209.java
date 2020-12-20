@@ -4,21 +4,21 @@ import java.util.Stack;
 
 public class Problem1209 {
     public String removeDuplicates(String s, final int k) {
-        Stack<Character> alphaStack = new Stack<>();
-        Stack<Integer> countStack = new Stack<>();
+        Stack<Character> letterStack = new Stack<>();
+        Stack<Integer> counterStack = new Stack<>();
         for(int i = 0; i < s.length(); ++i){
             final char ch = s.charAt(i);
-            if(!alphaStack.empty() && alphaStack.peek() == ch){
-                countStack.push(countStack.pop() + 1);
+            if(!letterStack.empty() && letterStack.peek() == ch){
+                counterStack.push(counterStack.pop() + 1);
             }
             else{
-                countStack.push(1);
-                alphaStack.push(ch);
+                counterStack.push(1);
+                letterStack.push(ch);
             }
-            while(!alphaStack.empty()){
-                if(countStack.peek() >= k){
-                    countStack.pop();
-                    alphaStack.pop();
+            while(!letterStack.empty()){
+                if(counterStack.peek() >= k){
+                    counterStack.pop();
+                    letterStack.pop();
                 }
                 else{
                     break;
@@ -26,9 +26,9 @@ public class Problem1209 {
             }
         }
         StringBuilder stringBuilder = new StringBuilder();
-        while(!alphaStack.empty()){
-            final char ch = alphaStack.pop();
-            final int factor = countStack.pop();
+        while(!letterStack.empty()){
+            final char ch = letterStack.pop();
+            final int factor = counterStack.pop();
             stringBuilder.append(String.valueOf(ch).repeat(factor));
         }
         return stringBuilder.reverse().toString();
