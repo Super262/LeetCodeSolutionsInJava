@@ -8,7 +8,6 @@ public class Problem1410 {
         StringBuilder result = new StringBuilder();
         HashMap<String, String> keywordSet = new HashMap<>();
         Stack<Character> decodedData = new Stack<>();
-        int index = 0;
         keywordSet.put("&gt;",">");
         keywordSet.put("&lt;","<");
         keywordSet.put("&amp;","&");
