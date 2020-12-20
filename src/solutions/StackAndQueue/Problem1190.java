@@ -1,26 +1,24 @@
 package solutions.StackAndQueue;
 
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Stack;
 
 public class Problem1190 {
     public String reverseParentheses(String s) {
-        Queue<Character> temp = new LinkedList<>();
         Stack<Character> dataStack = new Stack<>();
-        char[] strArray = s.toCharArray();
         StringBuilder result = new StringBuilder();
-        for(char c : strArray){
-            if (c == ')') {
+        for(int i = 0; i < s.length(); ++i){
+            char ch = s.charAt(i);
+            if (ch == ')') {
+                StringBuilder temp = new StringBuilder();
                 while (dataStack.peek() != '(') {
-                    temp.add(dataStack.pop());
+                    temp.append(dataStack.pop());
                 }
                 dataStack.pop();
-                while (!temp.isEmpty()) {
-                    dataStack.push(temp.poll());
+                for(int j = 0; j < temp.length(); ++j){
+                    dataStack.push(temp.charAt(j));
                 }
             } else {
-                dataStack.push(c);
+                dataStack.push(ch);
             }
         }
         while(!dataStack.empty()){
