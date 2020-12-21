@@ -7,16 +7,19 @@ public class Problem1673 {
         if (nums.length <= k){
             return nums;
         }
-        Stack<Integer> stack = new Stack<>();
+        final int[] stack = new int[k];
+        int stackSize = 0;
+        int stackPeek = -1;
         for (int i = 0; i < nums.length; ++i){
-            while (!stack.empty() && stack.peek() > nums[i] && stack.size() + nums.length - i > k){
-                stack.pop();
+            while (stackSize > 0 && stack[stackPeek] > nums[i] && stackSize + nums.length - i > k){
+                --stackPeek;
+                --stackSize;
             }
-            stack.push(nums[i]);
+            if (stackPeek < k - 1){
+                stack[++stackPeek] = nums[i];
+                ++stackSize;
+            }
         }
-        while (stack.size() > k){
-            stack.pop();
-        }
-        return stack.stream().mapToInt(Integer::valueOf).toArray();
+        return stack;
     }
 }
