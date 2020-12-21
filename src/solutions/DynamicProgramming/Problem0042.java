@@ -1,4 +1,4 @@
-package solutions.StackAndQueue;
+package solutions.DynamicProgramming;
 
 public class Problem0042 {
     public int trap(int[] height) {
