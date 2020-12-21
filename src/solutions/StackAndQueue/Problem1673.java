@@ -1,6 +1,5 @@
 package solutions.StackAndQueue;
 
-import java.util.Stack;
 
 public class Problem1673 {
     public int[] mostCompetitive(int[] nums, final int k) {
