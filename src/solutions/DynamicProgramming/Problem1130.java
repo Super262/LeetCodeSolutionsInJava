@@ -20,7 +20,7 @@ public class Problem1130 {
                     minSum[i][j] = arr[i] * arr[j];
                 }
                 else{
-                    for (int k = i; k < j; ++k){
+                    for (int k = i; k <= j; ++k){
                         int leftFactor = 0, rightFactor = 0, tempValue = 0;
                         for(int leftIndex = i; leftIndex <= k; ++leftIndex){
                             leftFactor = Math.max(leftFactor, arr[leftIndex]);
