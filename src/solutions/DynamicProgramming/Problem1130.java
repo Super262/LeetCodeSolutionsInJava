@@ -1,4 +1,4 @@
-package solutions.StackAndQueue;
+package solutions.DynamicProgramming;
 
 import java.util.Arrays;
 
