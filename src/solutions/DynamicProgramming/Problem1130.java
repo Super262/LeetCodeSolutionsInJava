@@ -11,12 +11,12 @@ public class Problem1130 {
         for (int i = 0; i < arr.length; ++i){
             Arrays.fill(minSum[i], Integer.MAX_VALUE);
         }
-        for (int subsetLength = 1; subsetLength <= arr.length; ++subsetLength){
-            for (int i = 0, j = i + subsetLength - 1; j < arr.length; ++i, ++j){
-                if (subsetLength == 1){
+        for (int currentsetLength = 1; currentsetLength <= arr.length; ++currentsetLength){
+            for (int i = 0, j = i + currentsetLength - 1; j < arr.length; ++i, ++j){
+                if (currentsetLength == 1){
                     minSum[i][j] = arr[i];
                 }
-                else if (subsetLength == 2){
+                else if (currentsetLength == 2){
                     minSum[i][j] = arr[i] * arr[j];
                 }
                 else{
