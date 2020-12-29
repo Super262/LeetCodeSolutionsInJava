@@ -6,14 +6,16 @@ public class Problem0591 {
     public boolean isValid(final String code) {
         Stack<String> tagStack = new Stack<>();
         final int codeLength = code.length();
+
         if (codeLength < 7 || code.charAt(0) != '<' || !Character.isUpperCase(code.charAt(1))){
             return false;
         }
 
         boolean isInTagContent = false;
         boolean alreadyHasOneClosedTag = false;
-        int i = 0;
+
         StringBuilder tempStr = new StringBuilder();
+        int i = 0;
         while (i < codeLength){
             if(alreadyHasOneClosedTag){
                 return false;
