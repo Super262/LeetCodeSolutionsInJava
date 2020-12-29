@@ -4,13 +4,12 @@ import java.util.Stack;
 
 public class Problem0591 {
     public boolean isValid(final String code) {
-        Stack<String> tagStack = new Stack<>();
         final int codeLength = code.length();
-
         if (codeLength < 7 || code.charAt(0) != '<' || !Character.isUpperCase(code.charAt(1))){
             return false;
         }
 
+        Stack<String> tagStack = new Stack<>();
         boolean isInTagContent = false;
         boolean alreadyHasOneClosedTag = false;
 
@@ -75,7 +74,7 @@ public class Problem0591 {
 
                 } else if (code.substring(i, (Math.min(i + 9,codeLength))).equals("<![CDATA[")){
                     i += 8;
-                    while (i < codeLength && i + 2 < codeLength && !code.substring(i, i + 3).equals("]]>")){
+                    while (i < codeLength && i + 2 < codeLength && !code.startsWith("]]>",i)){
                         i++;
                     }
                     if (i >= codeLength || i + 2 >= codeLength){
