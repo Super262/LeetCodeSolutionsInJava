@@ -26,7 +26,7 @@ public class Problem0591 {
                 }
                 if (code.charAt(i + 1) == '/'){
                     i += 2;
-                    while (i < codeLength && code.charAt(i) != '>' && Character.isUpperCase(code.charAt(i))){
+                    while (i < codeLength && code.charAt(i) != '>'){
                         if (Character.isUpperCase(code.charAt(i))){
                             tempStr.append(code.charAt(i));
                             i++;
@@ -73,7 +73,7 @@ public class Problem0591 {
                     }
 
                 } else if (code.substring(i, (Math.min(i + 9,codeLength))).equals("<![CDATA[")){
-                    i += 8;
+                    i += 9;
                     while (i < codeLength && i + 2 < codeLength && !code.startsWith("]]>",i)){
                         i++;
                     }
