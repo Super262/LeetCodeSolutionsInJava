@@ -12,9 +12,10 @@ public class Problem0901_StockSpanner {
         asecStack = new Stack<>();
         spanStack = new Stack<>();
     }
+
     public int next(int price) {
         int span = 1;
-        while(!asecStack.empty() && asecStack.peek() <= price){
+        while (!asecStack.empty() && asecStack.peek() <= price) {
             asecStack.pop();
             span += spanStack.pop();
         }

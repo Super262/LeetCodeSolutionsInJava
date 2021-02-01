@@ -5,36 +5,33 @@ import java.util.Stack;
 public class Problem0020 {
     public boolean isValid(String s) {
         Stack<Character> temp = new Stack<>();
-        for(char c : s.toCharArray()){
-            switch(c){
-                case ')':{
-                    if(!temp.empty() && temp.peek() == '('){
+        for (char c : s.toCharArray()) {
+            switch (c) {
+                case ')': {
+                    if (!temp.empty() && temp.peek() == '(') {
                         temp.pop();
-                    }
-                    else{
+                    } else {
                         return false;
                     }
                     break;
                 }
-                case ']':{
-                    if(!temp.empty() && temp.peek() == '['){
+                case ']': {
+                    if (!temp.empty() && temp.peek() == '[') {
                         temp.pop();
-                    }
-                    else{
+                    } else {
                         return false;
                     }
                     break;
                 }
-                case '}':{
-                    if(!temp.empty() && temp.peek() == '{'){
+                case '}': {
+                    if (!temp.empty() && temp.peek() == '{') {
                         temp.pop();
-                    }
-                    else{
+                    } else {
                         return false;
                     }
                     break;
                 }
-                default:{
+                default: {
                     temp.push(c);
                     break;
                 }

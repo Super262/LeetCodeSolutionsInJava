@@ -5,72 +5,67 @@ public class Problem0224 {
         s = '(' + s + ')';
         final int strLen = s.length();
         final int[] numbersStack = new int[strLen];
-        final char[] operatorsStack =  new char[strLen];
+        final char[] operatorsStack = new char[strLen];
         int numStackPeek = -1;
         int opStackSize = 0, opStackPeek = -1;
         boolean prevCharIsDigit = false;
-        for (int i = 0; i < strLen; ++i){
+        for (int i = 0; i < strLen; ++i) {
             char ch = s.charAt(i);
-            if(ch == '('){
+            if (ch == '(') {
                 operatorsStack[++opStackPeek] = ch;
                 ++opStackSize;
                 prevCharIsDigit = false;
-            }
-            else if (ch == '+' || ch == '-'){
-                while(opStackSize > 0 && operatorsStack[opStackPeek] != '('){
+            } else if (ch == '+' || ch == '-') {
+                while (opStackSize > 0 && operatorsStack[opStackPeek] != '(') {
                     final int b = numbersStack[numStackPeek--];
 
                     final int a = numbersStack[numStackPeek--];
 
-                    numbersStack[++numStackPeek] = doOperation(a, b, operatorsStack[opStackPeek--]);
+                    numbersStack[++numStackPeek] = doOperation(a,b,operatorsStack[opStackPeek--]);
                     --opStackSize;
                 }
                 operatorsStack[++opStackPeek] = ch;
                 ++opStackSize;
                 prevCharIsDigit = false;
-            }
-            else if (ch >= '0' && ch <= '9'){
+            } else if (ch >= '0' && ch <= '9') {
                 int digit = ch - '0';
-                if (prevCharIsDigit){
+                if (prevCharIsDigit) {
                     numbersStack[numStackPeek] = numbersStack[numStackPeek] * 10 + digit;
-                }
-                else{
+                } else {
                     numbersStack[++numStackPeek] = digit;
                 }
                 prevCharIsDigit = true;
-            }
-            else if (ch == ')'){
-                while(operatorsStack[opStackPeek] != '('){
+            } else if (ch == ')') {
+                while (operatorsStack[opStackPeek] != '(') {
                     final int b = numbersStack[numStackPeek--];
 
                     final int a = numbersStack[numStackPeek--];
 
-                    numbersStack[++numStackPeek] = doOperation(a, b, operatorsStack[opStackPeek--]);
+                    numbersStack[++numStackPeek] = doOperation(a,b,operatorsStack[opStackPeek--]);
                     --opStackSize;
                 }
                 --opStackPeek;
                 --opStackSize;
                 prevCharIsDigit = false;
-            }
-            else{
+            } else {
                 prevCharIsDigit = false;
             }
         }
         return numbersStack[numStackPeek];
     }
 
-    private int doOperation (int a, int b, char op){
+    private int doOperation(int a,int b,char op) {
         int result = 0;
-        switch (op){
-            case '+':{
+        switch (op) {
+            case '+': {
                 result = a + b;
                 break;
             }
-            case '-':{
+            case '-': {
                 result = a - b;
                 break;
             }
-            default:{
+            default: {
                 break;
             }
         }

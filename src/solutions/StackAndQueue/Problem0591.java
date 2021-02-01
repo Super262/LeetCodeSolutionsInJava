@@ -5,7 +5,7 @@ import java.util.Stack;
 public class Problem0591 {
     public boolean isValid(final String code) {
         final int codeLength = code.length();
-        if (codeLength < 7 || code.charAt(0) != '<' || !Character.isUpperCase(code.charAt(1))){
+        if (codeLength < 7 || code.charAt(0) != '<' || !Character.isUpperCase(code.charAt(1))) {
             return false;
         }
 
@@ -15,31 +15,31 @@ public class Problem0591 {
 
         StringBuilder tempStr = new StringBuilder();
         int i = 0;
-        while (i < codeLength){
-            if(alreadyHasOneClosedTag){
+        while (i < codeLength) {
+            if (alreadyHasOneClosedTag) {
                 return false;
             }
             char ch = code.charAt(i);
-            if (ch == '<'){
-                if (i + 1 >= codeLength){
+            if (ch == '<') {
+                if (i + 1 >= codeLength) {
                     return false;
                 }
-                if (code.charAt(i + 1) == '/'){
+                if (code.charAt(i + 1) == '/') {
                     i += 2;
-                    while (i < codeLength && code.charAt(i) != '>'){
-                        if (Character.isUpperCase(code.charAt(i))){
+                    while (i < codeLength && code.charAt(i) != '>') {
+                        if (Character.isUpperCase(code.charAt(i))) {
                             tempStr.append(code.charAt(i));
                             i++;
                         } else {
                             return false;
                         }
                     }
-                    if (i >= codeLength || code.charAt(i) != '>'){
+                    if (i >= codeLength || code.charAt(i) != '>') {
                         return false;
                     }
-                    if (!tagStack.empty() && tempStr.toString().equals(tagStack.peek())){
+                    if (!tagStack.empty() && tempStr.toString().equals(tagStack.peek())) {
                         tagStack.pop();
-                        if (tagStack.empty()){
+                        if (tagStack.empty()) {
                             isInTagContent = false;
                             alreadyHasOneClosedTag = true;
                         }
@@ -50,20 +50,20 @@ public class Problem0591 {
                         return false;
                     }
 
-                } else if (Character.isUpperCase(code.charAt(i + 1))){
+                } else if (Character.isUpperCase(code.charAt(i + 1))) {
                     i++;
-                    while (i < codeLength && code.charAt(i) != '>'){
-                        if (Character.isUpperCase(code.charAt(i))){
+                    while (i < codeLength && code.charAt(i) != '>') {
+                        if (Character.isUpperCase(code.charAt(i))) {
                             tempStr.append(code.charAt(i));
                             i++;
                         } else {
                             return false;
                         }
                     }
-                    if (i >= codeLength || code.charAt(i) != '>'){
+                    if (i >= codeLength || code.charAt(i) != '>') {
                         return false;
                     }
-                    if(tempStr.length() > 0 && tempStr.length() < 10) {
+                    if (tempStr.length() > 0 && tempStr.length() < 10) {
                         tagStack.push(tempStr.toString());
                         tempStr.setLength(0);
                         isInTagContent = true;
@@ -72,12 +72,12 @@ public class Problem0591 {
                         return false;
                     }
 
-                } else if (code.substring(i, (Math.min(i + 9,codeLength))).equals("<![CDATA[")){
+                } else if (code.substring(i,(Math.min(i + 9,codeLength))).equals("<![CDATA[")) {
                     i += 9;
-                    while (i < codeLength && i + 2 < codeLength && !code.startsWith("]]>",i)){
+                    while (i < codeLength && i + 2 < codeLength && !code.startsWith("]]>",i)) {
                         i++;
                     }
-                    if (i >= codeLength || i + 2 >= codeLength){
+                    if (i >= codeLength || i + 2 >= codeLength) {
                         return false;
                     }
                     i += 3;
@@ -85,9 +85,8 @@ public class Problem0591 {
                 } else {
                     return false;
                 }
-            } else if (ch == '>' || ch == '/' || ch == '!' || ch == '[' || ch == ']' || ch == ' '
-                    || Character.isDigit(ch) || Character.isUpperCase(ch) || Character.isLowerCase(ch)) {
-                if (!isInTagContent){
+            } else if (ch == '>' || ch == '/' || ch == '!' || ch == '[' || ch == ']' || ch == ' ' || Character.isDigit(ch) || Character.isUpperCase(ch) || Character.isLowerCase(ch)) {
+                if (!isInTagContent) {
                     return false;
                 }
                 i++;

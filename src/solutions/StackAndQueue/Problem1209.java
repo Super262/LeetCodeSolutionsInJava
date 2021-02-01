@@ -3,30 +3,28 @@ package solutions.StackAndQueue;
 import java.util.Stack;
 
 public class Problem1209 {
-    public String removeDuplicates(String s, final int k) {
+    public String removeDuplicates(String s,final int k) {
         Stack<Character> letterStack = new Stack<>();
         Stack<Integer> counterStack = new Stack<>();
-        for(int i = 0; i < s.length(); ++i){
+        for (int i = 0; i < s.length(); ++i) {
             final char ch = s.charAt(i);
-            if(!letterStack.empty() && letterStack.peek() == ch){
+            if (!letterStack.empty() && letterStack.peek() == ch) {
                 counterStack.push(counterStack.pop() + 1);
-            }
-            else{
+            } else {
                 counterStack.push(1);
                 letterStack.push(ch);
             }
-            while(!letterStack.empty()){
-                if(counterStack.peek() >= k){
+            while (!letterStack.empty()) {
+                if (counterStack.peek() >= k) {
                     counterStack.pop();
                     letterStack.pop();
-                }
-                else{
+                } else {
                     break;
                 }
             }
         }
         StringBuilder stringBuilder = new StringBuilder();
-        while(!letterStack.empty()){
+        while (!letterStack.empty()) {
             final char ch = letterStack.pop();
             final int factor = counterStack.pop();
             stringBuilder.append(String.valueOf(ch).repeat(factor));

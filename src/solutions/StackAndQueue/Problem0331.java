@@ -4,19 +4,18 @@ public class Problem0331 {
     public boolean isValidSerialization(final String preorder) {
         int remainder = 1;
         boolean lookingForParenthesis = false;
-        for(int i = 0; i < preorder.length(); ++i){
-            if(preorder.charAt(i) == ',' || lookingForParenthesis){
+        for (int i = 0; i < preorder.length(); ++i) {
+            if (preorder.charAt(i) == ',' || lookingForParenthesis) {
                 lookingForParenthesis = false;
                 continue;
-            }
-            else{
+            } else {
                 lookingForParenthesis = true;
             }
             --remainder;
-            if(remainder < 0){
+            if (remainder < 0) {
                 return false;
             }
-            if(preorder.charAt(i) != '#'){
+            if (preorder.charAt(i) != '#') {
                 remainder += 2;
             }
         }

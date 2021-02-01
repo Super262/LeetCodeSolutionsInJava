@@ -4,21 +4,18 @@ package solutions.StackAndQueue;
 public class Problem1541 {
     public int minInsertions(String s) {
         int result = 0, left = 0;
-        for(int i = 0; i < s.length(); ++i){
-            if(s.charAt(i) == '('){
+        for (int i = 0; i < s.length(); ++i) {
+            if (s.charAt(i) == '(') {
                 left++;
-            }
-            else{
-                if(i + 1 < s.length() && s.charAt(i + 1) == ')'){
+            } else {
+                if (i + 1 < s.length() && s.charAt(i + 1) == ')') {
                     ++i;
-                }
-                else{
+                } else {
                     ++result;
                 }
-                if(left > 0){
+                if (left > 0) {
                     left--;
-                }
-                else{
+                } else {
                     ++result;
                 }
             }

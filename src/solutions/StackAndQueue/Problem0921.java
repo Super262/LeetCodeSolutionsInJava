@@ -7,13 +7,12 @@ public class Problem0921 {
         final Stack<Character> stack = new Stack<>();
         final int strLength = S.length();
         int remainderCount = 0;
-        for (int i = 0; i < strLength; ++i){
+        for (int i = 0; i < strLength; ++i) {
             char ch = S.charAt(i);
-            if(!stack.empty() && ch == ')' && stack.peek() == '('){
+            if (!stack.empty() && ch == ')' && stack.peek() == '(') {
                 stack.pop();
                 --remainderCount;
-            }
-            else{
+            } else {
                 stack.push(ch);
                 ++remainderCount;
             }

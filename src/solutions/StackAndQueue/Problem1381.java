@@ -14,18 +14,18 @@ public class Problem1381 {
         }
 
         public void push(int x) {
-            if(topIndex != maxSize - 1){
+            if (topIndex != maxSize - 1) {
                 data[++topIndex] = x;
             }
         }
 
         public int pop() {
-            return topIndex < 0 ? -1:data[topIndex--];
+            return topIndex < 0 ? -1 : data[topIndex--];
         }
 
-        public void increment(int k, int val) {
-            if(topIndex >= 0){
-                for(int i = topIndex + 1 > k ? k - 1:topIndex; i >= 0; --i){
+        public void increment(int k,int val) {
+            if (topIndex >= 0) {
+                for (int i = topIndex + 1 > k ? k - 1 : topIndex; i >= 0; --i) {
                     data[i] += val;
                 }
             }

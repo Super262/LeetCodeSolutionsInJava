@@ -6,21 +6,21 @@ public class Problem0150 {
     public int evalRPN(String[] tokens) {
         int result = 0;
         Stack<Integer> stack = new Stack<>();
-        for(String str : tokens){
-            switch(str){
-                case "+":{
+        for (String str : tokens) {
+            switch (str) {
+                case "+": {
                     int b = stack.pop();
                     int a = stack.pop();
                     stack.push(a + b);
                     break;
                 }
-                case "-":{
+                case "-": {
                     int b = stack.pop();
                     int a = stack.pop();
                     stack.push(a - b);
                     break;
                 }
-                case "*" :{
+                case "*": {
                     int b = stack.pop();
                     int a = stack.pop();
                     stack.push(a * b);
@@ -32,7 +32,7 @@ public class Problem0150 {
                     stack.push(a / b);
                     break;
                 }
-                default:{
+                default: {
                     stack.push(Integer.parseInt(str));
                     break;
                 }

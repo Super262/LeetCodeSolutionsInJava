@@ -9,38 +9,35 @@ public class Problem1410 {
         keywordSet.put("&lt;","<");
         keywordSet.put("&amp;","&");
         keywordSet.put("&quot;","\"");
-        keywordSet.put("&apos;", "'");
+        keywordSet.put("&apos;","'");
         keywordSet.put("&frasl;","/");
         StringBuilder result = new StringBuilder();
         StringBuilder stack = new StringBuilder();
         boolean needTestComer = false;
-        for(int i = 0; i < text.length(); ++i){
+        for (int i = 0; i < text.length(); ++i) {
             char ch = text.charAt(i);
-            if (ch == '&'){
+            if (ch == '&') {
                 needTestComer = true;
                 stack.append(ch);
-            }
-            else{
-                if (needTestComer){
+            } else {
+                if (needTestComer) {
                     stack.append(ch);
-                    if (ch == ';'){
+                    if (ch == ';') {
                         String tempKey = stack.toString();
-                        if (keywordSet.containsKey(tempKey)){
+                        if (keywordSet.containsKey(tempKey)) {
                             result.append(keywordSet.get(tempKey));
-                        }
-                        else{
+                        } else {
                             result.append(stack);
                         }
                         stack.setLength(0);
                         needTestComer = false;
                     }
-                }
-                else {
+                } else {
                     result.append(ch);
                 }
             }
         }
-        if(stack.length() != 0){
+        if (stack.length() != 0) {
             result.append(stack);
         }
         return result.toString();

@@ -2,10 +2,10 @@ package solutions.StackAndQueue;
 
 public class Problem0084 {
     public int largestRectangleArea(int[] heights) {
-        if (heights == null || heights.length == 0){
+        if (heights == null || heights.length == 0) {
             return 0;
         }
-        if (heights.length == 1){
+        if (heights.length == 1) {
             return heights[0];
         }
         int[] stack = new int[heights.length];
@@ -13,15 +13,14 @@ public class Problem0084 {
         int result = -1;
         int[] leftLessEleIndex = new int[heights.length];
         int[] rightLessEleIndex = new int[heights.length];
-        for (int i = 0; i < heights.length; ++i){
-            while (stackSize != 0 && heights[stack[stackPeek]] >= heights[i]){
+        for (int i = 0; i < heights.length; ++i) {
+            while (stackSize != 0 && heights[stack[stackPeek]] >= heights[i]) {
                 --stackPeek;
                 --stackSize;
             }
-            if(stackSize == 0){
+            if (stackSize == 0) {
                 leftLessEleIndex[i] = -1;
-            }
-            else{
+            } else {
                 leftLessEleIndex[i] = stack[stackPeek];
             }
             stack[++stackPeek] = i;
@@ -29,22 +28,21 @@ public class Problem0084 {
         }
         stackSize = 0;
         stackPeek = -1;
-        for (int i = heights.length - 1; i >= 0 ; --i){
-            while (stackSize != 0  && heights[stack[stackPeek]] >= heights[i]){
+        for (int i = heights.length - 1; i >= 0; --i) {
+            while (stackSize != 0 && heights[stack[stackPeek]] >= heights[i]) {
                 --stackPeek;
                 --stackSize;
             }
-            if(stackSize == 0){
+            if (stackSize == 0) {
                 rightLessEleIndex[i] = heights.length;
-            }
-            else{
+            } else {
                 rightLessEleIndex[i] = stack[stackPeek];
             }
             stack[++stackPeek] = i;
             ++stackSize;
         }
-        for (int i = 0; i < heights.length; ++i){
-            result = Math.max(result, heights[i] * (rightLessEleIndex[i] - leftLessEleIndex[i] - 1));
+        for (int i = 0; i < heights.length; ++i) {
+            result = Math.max(result,heights[i] * (rightLessEleIndex[i] - leftLessEleIndex[i] - 1));
         }
         return result;
     }

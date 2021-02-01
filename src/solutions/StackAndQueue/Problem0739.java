@@ -6,8 +6,8 @@ public class Problem0739 {
     public int[] dailyTemperatures(int[] T) {
         int[] result = new int[T.length];
         Stack<Integer> temp = new Stack<>();
-        for(int i = 0; i < T.length; ++i){
-            while(!temp.empty() && T[temp.peek()] < T[i]){
+        for (int i = 0; i < T.length; ++i) {
+            while (!temp.empty() && T[temp.peek()] < T[i]) {
                 result[temp.peek()] = i - temp.peek();
                 temp.pop();
             }

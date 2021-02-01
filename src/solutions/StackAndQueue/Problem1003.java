@@ -7,50 +7,44 @@ public class Problem1003 {
         Stack<String> temp = new Stack<>();
         int length = s.length();
         char[] strArray = s.toCharArray();
-        for(int i = 0; i < length; ++i){
+        for (int i = 0; i < length; ++i) {
             char c = strArray[i];
-            if(i < length - 1){
-                switch(c){
-                    case 'a':{
-                        if(strArray[i+1] == 'b'){
+            if (i < length - 1) {
+                switch (c) {
+                    case 'a': {
+                        if (strArray[i + 1] == 'b') {
                             temp.push("ab");
                             ++i;
-                        }
-                        else{
+                        } else {
                             temp.push("a");
                         }
                         break;
                     }
-                    case 'b':{
-                        if(strArray[i+1] == 'c' && !temp.empty() && temp.peek().equals("a")){
+                    case 'b': {
+                        if (strArray[i + 1] == 'c' && !temp.empty() && temp.peek().equals("a")) {
                             temp.pop();
                             ++i;
-                        }
-                        else if(!temp.empty() && temp.peek().equals("a")){
+                        } else if (!temp.empty() && temp.peek().equals("a")) {
                             temp.pop();
                             temp.push("ab");
-                        }
-                        else{
+                        } else {
                             return false;
                         }
                         break;
                     }
-                    default:{
-                        if(!temp.empty() && temp.peek().equals("ab")){
+                    default: {
+                        if (!temp.empty() && temp.peek().equals("ab")) {
                             temp.pop();
-                        }
-                        else{
+                        } else {
                             return false;
                         }
                         break;
                     }
                 }
-            }
-            else{
-                if(strArray[i] == 'c' && !temp.empty() && temp.peek().equals("ab")){
+            } else {
+                if (strArray[i] == 'c' && !temp.empty() && temp.peek().equals("ab")) {
                     temp.pop();
-                }
-                else{
+                } else {
                     return false;
                 }
             }
