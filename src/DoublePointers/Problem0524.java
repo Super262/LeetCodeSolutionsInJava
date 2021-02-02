@@ -9,7 +9,7 @@ public class Problem0524 {
         }
         final int sLen = s.length();
         String result = "";
-        int resultLen = 0; 
+        int resultLen = 0;
         for (String word : d) {
             int wordLen = word.length();
             int sP = 0;
