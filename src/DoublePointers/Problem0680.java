@@ -52,9 +52,7 @@ public class Problem0680 {
                     break;
                 }
             }
-            if (nI >= nJ) {
-                return true;
-            }
+            return nI >= nJ;
         }
         return false;
     }

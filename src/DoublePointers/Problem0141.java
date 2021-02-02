@@ -1,16 +1,6 @@
 package DoublePointers;
 
 public class Problem0141 {
-    private static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
-    }
-
     public boolean hasCycle(ListNode head) {
         if (head == null) {
             return false;
@@ -26,5 +16,15 @@ public class Problem0141 {
             }
         }
         return false;
+    }
+
+    private static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+            next = null;
+        }
     }
 }

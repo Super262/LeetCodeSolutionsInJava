@@ -20,7 +20,7 @@ public class Problem0347 {
             if (pq.size() < k) {
                 pq.add(num);
             } else {
-                if(numToFreq.get(pq.peek()) < numToFreq.get(num)){
+                if (numToFreq.get(pq.peek()) < numToFreq.get(num)) {
                     pq.poll();
                     pq.add(num);
                 }

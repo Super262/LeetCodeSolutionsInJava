@@ -12,19 +12,19 @@ public class Problem0345 {
         if (sLen < 1) {
             return s;
         }
-        HashSet<Character> vowels = new HashSet<>(Arrays.asList('a','e','i','o','u', 'A', 'E', 'I', 'O', 'U'));
+        HashSet<Character> vowels = new HashSet<>(Arrays.asList('a','e','i','o','u','A','E','I','O','U'));
         char[] tempStr = s.toCharArray();
         int i = 0;
         int j = sLen - 1;
         char tempCh;
         while (i < j) {
-            while(i < j && !vowels.contains(tempStr[i])){
+            while (i < j && !vowels.contains(tempStr[i])) {
                 ++i;
             }
-            while(j > i && !vowels.contains(tempStr[j])){
+            while (j > i && !vowels.contains(tempStr[j])) {
                 --j;
             }
-            if(i < j){
+            if (i < j) {
                 tempCh = tempStr[i];
                 tempStr[i] = tempStr[j];
                 tempStr[j] = tempCh;
