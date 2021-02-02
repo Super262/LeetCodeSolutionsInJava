@@ -20,8 +20,8 @@ public class Problem0406 {
             }
         });
         ArrayList<int[]> result = new ArrayList<>(people.length);
-        for(int[] p : people){
-            result.add(p[1], p);
+        for (int[] p : people) {
+            result.add(p[1],p);
         }
         return result.toArray(new int[people.length][]);
     }
