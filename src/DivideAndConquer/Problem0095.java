@@ -53,7 +53,7 @@ public class Problem0095 {
                 }
             }
         } else {
-            if(leftChildren.isEmpty() && rightChildren.isEmpty()){
+            if (leftChildren.isEmpty() && rightChildren.isEmpty()) {
                 TreeNode root = new TreeNode(values[rootIndex]);
                 result.addLast(root);
                 return result;
