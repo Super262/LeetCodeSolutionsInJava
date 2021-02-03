@@ -1,4 +1,4 @@
-package Others;
+package BinarySearch;
 
 public class Problem0034 {
     private int[] searchForRange(int[] nums,int start,int end,int target) {
