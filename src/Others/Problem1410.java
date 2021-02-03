@@ -12,33 +12,30 @@ public class Problem1410 {
         keywordSet.put("&apos;","'");
         keywordSet.put("&frasl;","/");
         StringBuilder result = new StringBuilder();
-        StringBuilder stack = new StringBuilder();
         boolean needTestComer = false;
+        int comerStart = -1;
         for (int i = 0; i < text.length(); ++i) {
             char ch = text.charAt(i);
             if (ch == '&') {
                 needTestComer = true;
-                stack.append(ch);
+                result.append(ch);
+                comerStart = result.length() - 1;
             } else {
                 if (needTestComer) {
-                    stack.append(ch);
+                    result.append(ch);
                     if (ch == ';') {
-                        String tempKey = stack.toString();
+                        String tempKey = result.substring(comerStart);
                         if (keywordSet.containsKey(tempKey)) {
+                            result.delete(comerStart, result.length());
                             result.append(keywordSet.get(tempKey));
-                        } else {
-                            result.append(stack);
                         }
-                        stack.setLength(0);
+                        comerStart = -1;
                         needTestComer = false;
                     }
                 } else {
                     result.append(ch);
                 }
             }
-        }
-        if (stack.length() != 0) {
-            result.append(stack);
         }
         return result.toString();
     }
