@@ -12,7 +12,7 @@ public class Problem0241 {
         int sLen = input.length();
         int i = 0;
         while (i < sLen) {
-            if (!Character.isDigit(input.charAt(i))) {
+            if (input.charAt(i) == '+' || input.charAt(i) == '-' || input.charAt(i) == '*') {
                 break;
             }
             ++i;
@@ -22,7 +22,7 @@ public class Problem0241 {
             return result;
         }
         while (i < sLen) {
-            if (!Character.isDigit(input.charAt(i))) {
+            if (input.charAt(i) == '+' || input.charAt(i) == '-' || input.charAt(i) == '*') {
                 List<Integer> left = diffWaysToCompute(input.substring(0,i));
                 List<Integer> right = diffWaysToCompute(input.substring(i + 1,sLen));
                 if (input.charAt(i) == '+') {
