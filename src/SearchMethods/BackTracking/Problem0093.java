@@ -19,8 +19,8 @@ public class Problem0093 {
         }
         if (count == 1) {
             if (s.charAt(0) == '0') {
-                if (s.equals("0")) {
-                    result.add("0");
+                if (sLen == 1) {
+                    result.add(s);
                 }
             } else {
                 int value = Integer.parseInt(s);
@@ -29,16 +29,29 @@ public class Problem0093 {
                 }
             }
         } else {
+            StringBuilder tempValue = new StringBuilder();
+            int initialLen;
             if (s.charAt(0) == '0') {
+                tempValue.append("0.");
+                initialLen = tempValue.length();
                 for (String postfix : splitToIntegers(count - 1,s.substring(1))) {
-                    result.add("0." + postfix);
+                    tempValue.append(postfix);
+                    result.add(tempValue.toString());
+                    tempValue.setLength(initialLen);
                 }
             } else {
+                int value;
                 for (int i = 1; i < sLen && i < 4; ++i) {
-                    int value = Integer.parseInt(s.substring(0,i));
+                    value = Integer.parseInt(s.substring(0,i));
                     if (value > 0 && value < 256) {
+                        tempValue.setLength(0);
+                        tempValue.append(value);
+                        tempValue.append('.');
+                        initialLen = tempValue.length();
                         for (String postfix : splitToIntegers(count - 1,s.substring(i))) {
-                            result.add(value + "." + postfix);
+                            tempValue.append(postfix);
+                            result.add(tempValue.toString());
+                            tempValue.setLength(initialLen);
                         }
                     }
                 }
