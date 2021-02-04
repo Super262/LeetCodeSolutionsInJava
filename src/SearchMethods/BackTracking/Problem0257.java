@@ -26,19 +26,20 @@ public class Problem0257 {
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> result = new LinkedList<>();
         if (root != null) {
+            StringBuilder tempValue = new StringBuilder();
+            tempValue.append(root.val);
             if (root.left != null || root.right != null) {
-                StringBuilder tempValue = new StringBuilder();
                 List<String> postPart = binaryTreePaths(root.left);
                 postPart.addAll(binaryTreePaths(root.right));
+                tempValue.append("->");
+                final int initialLen = tempValue.length();
                 for (String s : postPart) {
-                    tempValue.append(root.val);
-                    tempValue.append("->");
                     tempValue.append(s);
                     result.add(tempValue.toString());
-                    tempValue.setLength(0);
+                    tempValue.setLength(initialLen);
                 }
             } else {
-                result.add(String.valueOf(root.val));
+                result.add(tempValue.toString());
             }
         }
         return result;
