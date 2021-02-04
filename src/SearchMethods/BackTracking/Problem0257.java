@@ -26,8 +26,7 @@ public class Problem0257 {
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> result = new LinkedList<>();
         if (root != null) {
-            StringBuilder tempValue = new StringBuilder();
-            tempValue.append(root.val);
+            StringBuilder tempValue = new StringBuilder(String.valueOf(root.val));
             if (root.left != null || root.right != null) {
                 List<String> postPart = binaryTreePaths(root.left);
                 postPart.addAll(binaryTreePaths(root.right));
