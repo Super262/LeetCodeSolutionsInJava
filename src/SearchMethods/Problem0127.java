@@ -1,33 +1,35 @@
 package SearchMethods;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 public class Problem0127 {
     public int ladderLength(String beginWord,String endWord,List<String> wordList) {
         wordList.add(beginWord);
-        final int maxLen = wordList.size();
-        HashMap<String, HashSet<String>> wordsMap = buildWordsMap(wordList);
-        HashSet<String> visited = new HashSet<>();
-        Queue<String> q = new LinkedList<>();
-        q.add(beginWord);
+        final int beginWordIndex = wordList.indexOf(beginWord);
+        final int endWordIndex = wordList.indexOf(endWord);
+        ArrayList<LinkedList<Integer>> wordsMap = buildWordsMap(wordList);
+        boolean[] visited = new boolean[wordList.size()];
+        Queue<Integer> q = new LinkedList<>();
+        q.add(beginWordIndex);
         int pathLength = 0;
         int levelSize;
-        String currentWord;
-        HashSet<String> adjWords;
+        int currentWordIndex;
         while (!q.isEmpty()) {
             ++pathLength;
             levelSize = q.size();
             while (levelSize > 0) {
-                currentWord = q.poll();
+                currentWordIndex = q.poll();
                 --levelSize;
-                visited.add(currentWord);
-                if (currentWord.equals(endWord)) {
+                visited[currentWordIndex] = true;
+                if (currentWordIndex == endWordIndex) {
                     return pathLength;
                 } else {
-                    if (wordsMap.containsKey(currentWord)) {
-                        adjWords = wordsMap.get(currentWord);
-                        for (String w : adjWords) {
-                            if (!visited.contains(w)) {
+                    if (wordsMap.size() > currentWordIndex) {
+                        for (Integer w : wordsMap.get(currentWordIndex)) {
+                            if (!visited[w]) {
                                 q.add(w);
                             }
                         }
@@ -38,20 +40,23 @@ public class Problem0127 {
         return 0;
     }
 
-    private HashMap<String, HashSet<String>> buildWordsMap(List<String> wordList) {
-        HashMap<String, HashSet<String>> wordsMap = new HashMap<>();
+    private ArrayList<LinkedList<Integer>> buildWordsMap(List<String> wordList) {
+        final int listSize = wordList.size();
+        ArrayList<LinkedList<Integer>> wordsMap = new ArrayList<>(listSize);
+        for(int i = 0; i < listSize; ++i){
+            wordsMap.add(new LinkedList<>());
+        }
+        int i = 0;
+        int j;
         for (String a : wordList) {
+            j = 0;
             for (String b : wordList) {
                 if (isConnected(a,b)) {
-                    if (wordsMap.containsKey(a)) {
-                        wordsMap.get(a).add(b);
-                    } else {
-                        HashSet<String> nodeSet = new HashSet<>();
-                        nodeSet.add(b);
-                        wordsMap.put(a,nodeSet);
-                    }
+                    wordsMap.get(i).addLast(j);
                 }
+                ++j;
             }
+            ++i;
         }
         return wordsMap;
     }
