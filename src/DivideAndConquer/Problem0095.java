@@ -4,25 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Problem0095 {
-    private static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode() {
-        }
-
-        TreeNode(int val) {
-            this.val = val;
-        }
-
-        TreeNode(int val,TreeNode left,TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
-    }
-
     private List<TreeNode> createBST(int[] values,int startIndex,int endIndex,int rootIndex) {
         if (startIndex > endIndex) {
             return new LinkedList<>();
@@ -91,5 +72,24 @@ public class Problem0095 {
             result.addAll(createBST(values,0,values.length - 1,i));
         }
         return result;
+    }
+
+    private static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val,TreeNode left,TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
     }
 }

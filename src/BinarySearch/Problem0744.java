@@ -19,8 +19,8 @@ public class Problem0744 {
                 h = m - 1;
             }
         }
-        for(int i = h; i < letters.length; ++i){
-            if(letters[i] > target){
+        for (int i = h; i < letters.length; ++i) {
+            if (letters[i] > target) {
                 return letters[i];
             }
         }

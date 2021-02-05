@@ -43,7 +43,7 @@ public class Problem0127 {
     private ArrayList<LinkedList<Integer>> buildWordsMap(List<String> wordList) {
         final int listSize = wordList.size();
         ArrayList<LinkedList<Integer>> wordsMap = new ArrayList<>(listSize);
-        for(int i = 0; i < listSize; ++i){
+        for (int i = 0; i < listSize; ++i) {
             wordsMap.add(new LinkedList<>());
         }
         int i = 0;

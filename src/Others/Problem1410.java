@@ -26,7 +26,7 @@ public class Problem1410 {
                     if (ch == ';') {
                         String tempKey = result.substring(comerStart);
                         if (keywordSet.containsKey(tempKey)) {
-                            result.delete(comerStart, result.length());
+                            result.delete(comerStart,result.length());
                             result.append(keywordSet.get(tempKey));
                         }
                         comerStart = -1;
