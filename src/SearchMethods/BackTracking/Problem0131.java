@@ -13,7 +13,7 @@ public class Problem0131 {
                 selfList.add(s);
                 result.add(selfList);
             } else {
-                if(isPalindrome(s, sLen)){
+                if (isPalindrome(s,sLen)) {
                     List<String> selfList = new LinkedList<>();
                     selfList.add(s);
                     result.add(selfList);
