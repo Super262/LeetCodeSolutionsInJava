@@ -4,25 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Problem0257 {
-    private static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode() {
-        }
-
-        TreeNode(int val) {
-            this.val = val;
-        }
-
-        TreeNode(int val,TreeNode left,TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
-    }
-
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> result = new LinkedList<>();
         if (root != null) {
@@ -42,5 +23,24 @@ public class Problem0257 {
             }
         }
         return result;
+    }
+
+    private static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val,TreeNode left,TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
     }
 }

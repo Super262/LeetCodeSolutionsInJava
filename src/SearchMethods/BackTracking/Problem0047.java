@@ -6,10 +6,10 @@ import java.util.List;
 
 public class Problem0047 {
     public List<List<Integer>> permuteUnique(int[] nums) {
-        if(nums == null || nums.length == 0){
+        if (nums == null || nums.length == 0) {
             return new LinkedList<>();
         } else {
-            return getResult(nums, 0, nums.length - 1);
+            return getResult(nums,0,nums.length - 1);
         }
     }
 
@@ -23,14 +23,14 @@ public class Problem0047 {
             result.add(l);
         } else {
             HashSet<Integer> visited = new HashSet<>();
-            for(int i = start; i <= end; ++i){
-                if(!visited.contains(nums[i])){
+            for (int i = start; i <= end; ++i) {
+                if (!visited.contains(nums[i])) {
                     visited.add(nums[i]);
-                    swap(nums, i, start);
-                    List<List<Integer>> part = getResult(nums, start + 1, end);
-                    swap(nums, i, start);
-                    for(List<Integer> l : part){
-                        l.add(0, nums[i]);
+                    swap(nums,i,start);
+                    List<List<Integer>> part = getResult(nums,start + 1,end);
+                    swap(nums,i,start);
+                    for (List<Integer> l : part) {
+                        l.add(0,nums[i]);
                         result.add(l);
                     }
                 }
