@@ -1,4 +1,4 @@
-package DynamicProgramming;
+package DynamicProgramming.FibonacciSequence;
 
 public class Problem0070 {
     public int climbStairs(int n) {
