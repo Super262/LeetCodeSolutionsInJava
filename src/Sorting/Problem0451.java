@@ -1,4 +1,4 @@
-package Sequencing;
+package Sorting;
 
 import java.util.ArrayList;
 import java.util.HashMap;

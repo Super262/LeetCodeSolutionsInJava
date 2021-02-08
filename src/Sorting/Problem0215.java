@@ -1,4 +1,4 @@
-package Sequencing;
+package Sorting;
 
 public class Problem0215 {
     private int partition(int[] nums,int start,int end) {

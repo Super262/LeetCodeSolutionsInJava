@@ -1,4 +1,4 @@
-package Sequencing;
+package Sorting;
 
 import java.util.Comparator;
 import java.util.HashMap;

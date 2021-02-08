@@ -1,4 +1,4 @@
-package Sequencing;
+package Sorting;
 
 public class Problem0075 {
     public void sortColors(int[] nums) {
