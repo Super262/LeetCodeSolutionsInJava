@@ -13,13 +13,13 @@ public class Problem0215 {
                 --j;
             }
             if (i < j) {
-                nums[i++] = nums[j];
+                nums[i] = nums[j];
             }
             while (i < j && nums[i] > pivot) {
                 ++i;
             }
             if (i < j) {
-                nums[j--] = nums[i];
+                nums[j] = nums[i];
             }
         }
         nums[i] = pivot;
@@ -35,9 +35,9 @@ public class Problem0215 {
             if (p == k) {
                 return nums[p];
             } else if (p > k) {
-                high = p;
+                high = p - 1;
             } else {
-                low = p;
+                low = p + 1;
             }
         }
         return nums[low];
