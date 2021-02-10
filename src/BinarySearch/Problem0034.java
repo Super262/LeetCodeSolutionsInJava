@@ -1,26 +1,30 @@
 package BinarySearch;
 
 public class Problem0034 {
+    private int findFirst(int[] nums,int target) {
+        int low = 0;
+        int high = nums.length;
+        int mid;
+        while (low < high) {
+            mid = low + (high - low) / 2;
+            if (nums[mid] >= target) {
+                high = mid;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return low;
+    }
+
     public int[] searchRange(int[] nums,int target) {
         int[] result = new int[]{-1,-1};
-        int start = 0;
-        int end = nums.length;
-        int mid;
-        while (start < end) {
-            mid = start + (end - start) / 2;
-            if (nums[mid] == target) {
-                for (int i = mid; i < end; ++i) {
-                    result[1] = nums[i] == target ? i : result[1];
-                }
-                for (int i = mid; i >= start; --i) {
-                    result[0] = nums[i] == target ? i : result[0];
-                }
-                return result;
-            } else if (nums[mid] > target) {
-                end = mid;
-            } else {
-                start = mid + 1;
-            }
+        int firstIndex = findFirst(nums,target);
+        if (firstIndex < nums.length && nums[firstIndex] == target) {
+            result[0] = firstIndex;
+            result[1] = firstIndex;
+        }
+        if (result[0] != -1) {
+            result[1] = findFirst(nums,target + 1) - 1;
         }
         return result;
     }
