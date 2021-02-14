@@ -1,7 +1,7 @@
 package DynamicProgramming.RangeInArray;
 
 public class Problem0303 {
-    static class NumArray {
+    private static class NumArray {
         private int[] preSum;
 
         public NumArray(int[] nums) {
