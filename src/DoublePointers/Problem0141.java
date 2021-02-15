@@ -5,17 +5,23 @@ public class Problem0141 {
         if (head == null) {
             return false;
         }
-        ListNode p1 = head;
-        ListNode p2 = head.next;
-        while (p1 != null && p2 != null && p2.next != null) {
-            if (p1 == p2) {
-                return true;
-            } else {
-                p1 = p1.next;
-                p2 = p2.next.next;
+        ListNode slowP = head;
+        ListNode fastP = head;
+        do {
+            slowP = slowP.next;
+            if (slowP == null) {
+                return false;
             }
-        }
-        return false;
+            fastP = fastP.next;
+            if (fastP == null) {
+                return false;
+            }
+            fastP = fastP.next;
+            if (fastP == null) {
+                return false;
+            }
+        } while (slowP != fastP);
+        return true;
     }
 
     private static class ListNode {
