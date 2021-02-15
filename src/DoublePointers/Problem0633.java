@@ -2,17 +2,17 @@ package DoublePointers;
 
 public class Problem0633 {
     public boolean judgeSquareSum(int c) {
-        int i = 0;
-        int j = (int) Math.sqrt(c);
+        int a = 0;
+        int b = (int) Math.sqrt(c);
         int tempSum;
-        while (i >= 0 && i <= j) {
-            tempSum = i * i + j * j;
+        while (a <= b) {
+            tempSum = a * a + b * b;
             if (tempSum == c) {
                 return true;
             } else if (tempSum > c) {
-                --j;
+                --b;
             } else {
-                ++i;
+                ++a;
             }
         }
         return false;
