@@ -5,55 +5,29 @@ public class Problem0680 {
         if (s == null) {
             return false;
         }
-        final int sLen = s.length();
-        if (sLen < 2) {
+        int low = 0;
+        int high = s.length() - 1;
+        while (low < high) {
+            if (s.charAt(low) != s.charAt(high)) {
+                break;
+            }
+            ++low;
+            --high;
+        }
+        if (low >= high) {
             return true;
         }
-        int i = 0;
-        int j = sLen - 1;
-        while (i < j) {
-            if (s.charAt(i) == s.charAt(j)) {
-                ++i;
-                --j;
-            } else {
-                if (i == j - 1) {
-                    return true;
-                } else {
-                    break;
-                }
+        return isPalindrome(s,low,high - 1) || isPalindrome(s,low + 1,high);
+    }
+
+    private boolean isPalindrome(String s,int start,int end) {
+        while (start < end) {
+            if (s.charAt(start) != s.charAt(end)) {
+                return false;
             }
+            ++start;
+            --end;
         }
-        if (i >= j) {
-            return true;
-        }
-        if (s.charAt(i) == s.charAt(j - 1)) {
-            int nI = i;
-            int nJ = j - 1;
-            while (nI < nJ) {
-                if (s.charAt(nI) == s.charAt(nJ)) {
-                    ++nI;
-                    --nJ;
-                } else {
-                    break;
-                }
-            }
-            if (nI >= nJ) {
-                return true;
-            }
-        }
-        if (s.charAt(i + 1) == s.charAt(j)) {
-            int nI = i + 1;
-            int nJ = j;
-            while (nI < nJ) {
-                if (s.charAt(nI) == s.charAt(nJ)) {
-                    ++nI;
-                    --nJ;
-                } else {
-                    break;
-                }
-            }
-            return nI >= nJ;
-        }
-        return false;
+        return true;
     }
 }
