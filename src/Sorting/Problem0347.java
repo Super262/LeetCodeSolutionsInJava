@@ -1,31 +1,33 @@
 package Sorting;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class Problem0347 {
     public int[] topKFrequent(int[] nums,int k) {
+        int[] result = new int[k];
         HashMap<Integer, Integer> numToFreq = new HashMap<>();
-        int curFreq;
         for (int num : nums) {
-            curFreq = 1;
-            if (numToFreq.containsKey(num)) {
-                curFreq += numToFreq.get(num);
-            }
-            numToFreq.put(num,curFreq);
+            numToFreq.put(num,numToFreq.getOrDefault(num,0) + 1);
         }
-        PriorityQueue<Integer> pq = new PriorityQueue<>(Comparator.comparingInt(numToFreq::get));
-        for (int num : numToFreq.keySet()) {
-            if (pq.size() < k) {
-                pq.add(num);
-            } else {
-                if (numToFreq.get(pq.peek()) < numToFreq.get(num)) {
-                    pq.poll();
-                    pq.add(num);
+        ArrayList<ArrayList<Integer>> freqToNum = new ArrayList<>(nums.length + 1);
+        for (int i = 0; i <= nums.length; ++i) {
+            freqToNum.add(new ArrayList<>());
+        }
+        for (Map.Entry<Integer, Integer> entry : numToFreq.entrySet()) {
+            freqToNum.get(entry.getValue()).add(entry.getKey());
+        }
+        int resultTop = 0;
+        int i;
+        for (int f = nums.length; f >= 0; --f) {
+            if (resultTop < result.length) {
+                i = 0;
+                while (resultTop < nums.length && i < freqToNum.get(f).size()) {
+                    result[resultTop++] = freqToNum.get(f).get(i++);
                 }
+            } else {
+                break;
             }
         }
-        return pq.stream().mapToInt(Integer::valueOf).toArray();
+        return result;
     }
 }
