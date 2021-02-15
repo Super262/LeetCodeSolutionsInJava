@@ -7,35 +7,36 @@ public class Problem0524 {
         if (s == null || s.isEmpty() || d == null || d.isEmpty()) {
             return "";
         }
-        final int sLen = s.length();
         String result = "";
         int resultLen = 0;
-        for (String word : d) {
-            int wordLen = word.length();
-            int sP = 0;
-            int wP = 0;
-            while (wP < wordLen) {
-                while (sP < sLen && s.charAt(sP) != word.charAt(wP)) {
-                    ++sP;
-                }
-                if (sP >= sLen) {
-                    break;
-                } else {
-                    ++sP;
-                }
-                ++wP;
-            }
-            if (wP >= wordLen) {
-                if (wordLen > resultLen) {
-                    result = word;
-                    resultLen = wordLen;
-                } else if (resultLen == wordLen) {
-                    if (word.compareTo(result) < 0) {
-                        result = word;
-                    }
+        int temp;
+        for (String w : d) {
+            temp = isSubStr(s,w);
+            if (temp != -1) {
+                if (temp > resultLen || (temp == resultLen && w.compareTo(result) < 0)) {
+                    result = w;
+                    resultLen = temp;
                 }
             }
         }
         return result;
+    }
+
+    private int isSubStr(String s,String w) {
+        int wLen = w.length();
+        int sLen = s.length();
+        int sP = 0;
+        int wP = 0;
+        while (sP < sLen && wP < wLen) {
+            if (s.charAt(sP) == w.charAt(wP)) {
+                ++wP;
+            }
+            ++sP;
+        }
+        if (wP >= wLen) {
+            return wLen;
+        } else {
+            return -1;
+        }
     }
 }
