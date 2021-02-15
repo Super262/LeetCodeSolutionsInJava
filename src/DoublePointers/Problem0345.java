@@ -1,37 +1,36 @@
 package DoublePointers;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
 public class Problem0345 {
     public String reverseVowels(String s) {
         if (s == null) {
             return null;
         }
-        final int sLen = s.length();
-        if (sLen < 1) {
+        char[] sArray = s.toCharArray();
+        if (sArray.length < 1) {
             return s;
         }
-        HashSet<Character> vowels = new HashSet<>(Arrays.asList('a','e','i','o','u','A','E','I','O','U'));
-        char[] tempStr = s.toCharArray();
-        int i = 0;
-        int j = sLen - 1;
+        int low = 0;
+        int high = sArray.length - 1;
         char tempCh;
-        while (i < j) {
-            while (i < j && !vowels.contains(tempStr[i])) {
-                ++i;
+        while (low < high) {
+            while (low < high && isVowel(sArray[high])) {
+                --high;
             }
-            while (j > i && !vowels.contains(tempStr[j])) {
-                --j;
+            while (low < high && isVowel(sArray[low])) {
+                ++low;
             }
-            if (i < j) {
-                tempCh = tempStr[i];
-                tempStr[i] = tempStr[j];
-                tempStr[j] = tempCh;
-                ++i;
-                --j;
+            if (low < high) {
+                tempCh = sArray[low];
+                sArray[low] = sArray[high];
+                sArray[high] = tempCh;
+                --high;
+                ++low;
             }
         }
-        return new String(tempStr);
+        return new String(sArray);
+    }
+
+    private boolean isVowel(char ch) {
+        return ch != 'A' && ch != 'E' && ch != 'I' && ch != 'O' && ch != 'U' && ch != 'a' && ch != 'e' && ch != 'i' && ch != 'o' && ch != 'u';
     }
 }
