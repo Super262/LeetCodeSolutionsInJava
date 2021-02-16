@@ -5,31 +5,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Problem0347 {
-    public int[] topKFrequent(int[] nums,int k) {
-        int[] result = new int[k];
-        HashMap<Integer, Integer> numToFreq = new HashMap<>();
-        for (int num : nums) {
-            numToFreq.put(num,numToFreq.getOrDefault(num,0) + 1);
+    public String frequencySort(String s) {
+        if (s == null || s.isEmpty()) {
+            return s;
         }
-        ArrayList<ArrayList<Integer>> freqToNum = new ArrayList<>(nums.length + 1);
-        for (int i = 0; i <= nums.length; ++i) {
-            freqToNum.add(new ArrayList<>());
+        HashMap<Character, Integer> chToFreq = new HashMap<>();
+        int sLen = s.length();
+        for (int i = 0; i < sLen; i++) {
+            chToFreq.put(s.charAt(i),chToFreq.getOrDefault(s.charAt(i),0) + 1);
         }
-        for (Map.Entry<Integer, Integer> entry : numToFreq.entrySet()) {
-            freqToNum.get(entry.getValue()).add(entry.getKey());
+        ArrayList<ArrayList<Character>> freqToCh = new ArrayList<>(sLen + 1);
+        for (int i = 0; i <= sLen; ++i) {
+            freqToCh.add(new ArrayList<>());
         }
-        int resultTop = 0;
-        int i;
-        for (int f = nums.length; f >= 0; --f) {
-            if (resultTop < result.length) {
-                i = 0;
-                while (resultTop < nums.length && i < freqToNum.get(f).size()) {
-                    result[resultTop++] = freqToNum.get(f).get(i++);
-                }
-            } else {
-                break;
+        StringBuilder strB = new StringBuilder(sLen);
+        for (Map.Entry<Character, Integer> entry : chToFreq.entrySet()) {
+            freqToCh.get(entry.getValue()).add(entry.getKey());
+        }
+        for (int f = sLen; f >= 0; f--) {
+            for (char ch : freqToCh.get(f)) {
+                strB.append(String.valueOf(ch).repeat(f));
             }
         }
-        return result;
+        return strB.toString();
     }
 }
