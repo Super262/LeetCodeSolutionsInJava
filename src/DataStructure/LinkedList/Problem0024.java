@@ -2,9 +2,6 @@ package DataStructure.LinkedList;
 
 public class Problem0024 {
     public ListNode swapPairs(ListNode head) {
-        if (head == null) {
-            return head;
-        }
         ListNode p1 = head;
         ListNode p2;
         int t;
