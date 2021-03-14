@@ -28,7 +28,9 @@ public class Problem0451 {
         for (int i = sLen; i >= 0; --i) {
             if (!frequencyBucket.get(i).isEmpty()) {
                 for (Character ch : frequencyBucket.get(i)) {
-                    result.append(String.valueOf(ch).repeat(i));
+                    for (int j = 0; j < i; ++j) {
+                        result.append(String.valueOf(ch));
+                    }
                 }
             }
         }

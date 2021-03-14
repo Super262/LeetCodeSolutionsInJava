@@ -25,7 +25,10 @@ public class Problem0394 {
                 final int factor = factorStack.pop();
                 final String strEle = strStack.pop().toString();
                 StringBuilder tempResultStringBuilder = new StringBuilder();
-                tempResultStringBuilder.append(strEle.repeat(Math.max(0,factor)));
+                final int repeatTimes = Math.max(0,factor);
+                for (int k = 0; k < repeatTimes; k++) {
+                    tempResultStringBuilder.append(strEle);
+                }
                 if (strStack.empty()) {
                     resultStringBuilder.append(tempResultStringBuilder);
                 } else {

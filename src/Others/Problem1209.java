@@ -27,7 +27,9 @@ public class Problem1209 {
         while (!letterStack.empty()) {
             final char ch = letterStack.pop();
             final int factor = counterStack.pop();
-            stringBuilder.append(String.valueOf(ch).repeat(factor));
+            for (int j = 0; j < factor; j++) {
+                stringBuilder.append(ch);
+            }
         }
         return stringBuilder.reverse().toString();
     }
