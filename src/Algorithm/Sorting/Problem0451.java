@@ -29,7 +29,7 @@ public class Problem0451 {
             if (!frequencyBucket.get(i).isEmpty()) {
                 for (Character ch : frequencyBucket.get(i)) {
                     for (int j = 0; j < i; ++j) {
-                        result.append(String.valueOf(ch));
+                        result.append(ch);
                     }
                 }
             }
