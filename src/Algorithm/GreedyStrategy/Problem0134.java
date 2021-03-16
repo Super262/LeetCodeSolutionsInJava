@@ -1,6 +1,6 @@
 package Algorithm.GreedyStrategy;
 
-public class Problem0187 {
+public class Problem0134 {
     public int canCompleteCircuit(int[] gas,int[] cost) {
         int firstPosition = 0;
         int currentPosition = 0;
