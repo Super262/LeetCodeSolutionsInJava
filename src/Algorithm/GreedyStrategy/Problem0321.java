@@ -66,6 +66,6 @@ public class Problem0321 {
             }
             return num1[start1 + i] - num2[start2 + i];
         }
-        return l1 - l2;
+        return l2 - l1;
     }
 }
