@@ -7,28 +7,22 @@ public class Problem0045 {
         }
         int result = 0;
         int start = 0;
-        int current_bound;
-        int next_start;
-        while (start < nums.length) {
-            if (start >= nums.length - 1) {
-                return result;
-            }
-            if (nums[start] <= 0) {
-                return nums.length;
-            }
+        int nextStart;
+        int currentBound;
+        while (start < nums.length - 1) {
             ++result;
-            current_bound = start + nums[start];
-            if (current_bound >= nums.length - 1) {
+            nextStart = start;
+            currentBound = start + nums[start];
+            if (currentBound >= nums.length - 1) {
                 return result;
             }
-            next_start = start + 1;
-            for (int candidate = start + 2; candidate <= current_bound; ++candidate) {
-                if (candidate + nums[candidate] >= next_start + nums[next_start]) {
-                    next_start = candidate;
+            for (int i = start + 1; i <= currentBound; ++i) {
+                if (i + nums[i] >= nextStart + nums[nextStart]) {
+                    nextStart = i;
                 }
             }
-            start = next_start;
+            start = nextStart;
         }
-        return nums.length;
+        return result;
     }
 }
