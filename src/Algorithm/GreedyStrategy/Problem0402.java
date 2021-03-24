@@ -24,7 +24,7 @@ public class Problem0402 {
             }
             stack[++stackTop] = digit;
         }
-        while(deletedCount < k){
+        while (deletedCount < k) {
             ++deletedCount;
             --stackTop;
         }

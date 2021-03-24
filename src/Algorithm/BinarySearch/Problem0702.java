@@ -1,12 +1,6 @@
 package Algorithm.BinarySearch;
 
 public class Problem0702 {
-    private static class ArrayReader {
-        public int get(int index) {
-            return index;
-        }
-    }
-
     public int search(ArrayReader reader,int target) {
         int kth = 1;
         while (reader.get(kth - 1) < target) {
@@ -30,5 +24,11 @@ public class Problem0702 {
             return end;
         }
         return -1;
+    }
+
+    private static class ArrayReader {
+        public int get(int index) {
+            return index;
+        }
     }
 }
