@@ -8,10 +8,7 @@ public class Problem0173 {
 
         public BSTIterator(TreeNode root) {
             stack = new LinkedList<>();
-            while (root != null) {
-                stack.addFirst(root);
-                root = root.left;
-            }
+            findMostLeft(root);
         }
 
         public int next() {
@@ -19,16 +16,19 @@ public class Problem0173 {
             if (curNode == null) {
                 return -1;
             }
-            TreeNode nextNode = curNode.right;
-            while (nextNode != null) {
-                stack.addFirst(nextNode);
-                nextNode = nextNode.left;
-            }
+            findMostLeft(curNode.right);
             return curNode.val;
         }
 
         public boolean hasNext() {
             return !stack.isEmpty();
+        }
+
+        private void findMostLeft(TreeNode root) {
+            while (root != null) {
+                stack.addFirst(root);
+                root = root.left;
+            }
         }
     }
 }
