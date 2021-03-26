@@ -50,7 +50,7 @@ public class Problem0272 {
             while (!s.isEmpty() && s.peek().right == node) {
                 node = s.pop();
             }
-            return; // Don't forget this!
+            return; // Don't forget this line!
         }
         node = node.right;
         while (node != null) {
@@ -66,7 +66,7 @@ public class Problem0272 {
             while (!s.isEmpty() && s.peek().left == node) {
                 node = s.pop();
             }
-            return; // Don't forget this!
+            return; // Don't forget this line!
         }
         node = node.left;
         while (node != null) {
