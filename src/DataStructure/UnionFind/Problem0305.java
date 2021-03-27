@@ -45,7 +45,6 @@ public class Problem0305 {
 
     private void connect(int[] father,int aIndex,int bIndex) {
         father[bIndex] = aIndex;
-        findAndCompress(father,aIndex);
         findAndCompress(father,bIndex);
     }
 
