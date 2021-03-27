@@ -21,7 +21,7 @@ public class Problem0305 {
                 continue;
             }
             matrix[pointToInt(p[0],p[1],n)] = 1;
-            father[pointToInt(p[0],p[1],n)] = pointToInt(p[0],p[1],n);
+            connect(father,pointToInt(p[0],p[1],n),pointToInt(p[0],p[1],n));
             temp = 1;
             if (result.size() > 0) {
                 temp += result.get(result.size() - 1);
@@ -45,7 +45,6 @@ public class Problem0305 {
 
     private void connect(int[] father,int aIndex,int bIndex) {
         father[bIndex] = aIndex;
-        findAndCompress(father,bIndex);
     }
 
     private int findAndCompress(int[] father,int nodeIndex) {
