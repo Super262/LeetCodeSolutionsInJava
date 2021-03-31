@@ -1,75 +1,57 @@
 package Algorithm.SearchMethods.BFS;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
 public class Problem0127 {
     public int ladderLength(String beginWord,String endWord,List<String> wordList) {
-        wordList.add(beginWord);
-        final int beginWordIndex = wordList.indexOf(beginWord);
-        final int endWordIndex = wordList.indexOf(endWord);
-        ArrayList<LinkedList<Integer>> wordsMap = buildWordsMap(wordList);
-        boolean[] visited = new boolean[wordList.size()];
-        Queue<Integer> q = new LinkedList<>();
-        q.add(beginWordIndex);
-        int pathLength = 0;
-        int levelSize;
-        int currentWordIndex;
+        HashSet<String> wordsDict = new HashSet<>(wordList);
+        if (!wordsDict.contains(endWord)) {
+            return 0;
+        }
+        HashSet<String> visited = new HashSet<>();
+        Queue<String> q = new LinkedList<>();
+        int pathLen = 0;
+        int currentSize;
+        q.add(beginWord);
         while (!q.isEmpty()) {
-            ++pathLength;
-            levelSize = q.size();
-            while (levelSize > 0) {
-                currentWordIndex = q.poll();
-                --levelSize;
-                visited[currentWordIndex] = true;
-                if (currentWordIndex == endWordIndex) {
-                    return pathLength;
-                } else {
-                    if (wordsMap.size() > currentWordIndex) {
-                        for (Integer w : wordsMap.get(currentWordIndex)) {
-                            if (!visited[w]) {
-                                q.add(w);
-                            }
-                        }
+            currentSize = q.size();
+            ++pathLen;
+            for (int i = 0; i < currentSize; ++i) {
+                String curNode = q.poll();
+                if (endWord.equals(curNode)) {
+                    return pathLen;
+                }
+                for (String candidate : getCandidates(curNode)) {
+                    if (visited.contains(candidate) || !wordsDict.contains(candidate)) {
+                        continue;
                     }
+                    q.add(candidate);
+                    visited.add(candidate);
                 }
             }
         }
         return 0;
     }
 
-    private ArrayList<LinkedList<Integer>> buildWordsMap(List<String> wordList) {
-        final int listSize = wordList.size();
-        ArrayList<LinkedList<Integer>> wordsMap = new ArrayList<>(listSize);
-        for (int i = 0; i < listSize; ++i) {
-            wordsMap.add(new LinkedList<>());
-        }
-        int i = 0;
-        int j;
-        for (String a : wordList) {
-            j = 0;
-            for (String b : wordList) {
-                if (isConnected(a,b)) {
-                    wordsMap.get(i).addLast(j);
+    private List<String> getCandidates(String source) {
+        String dict = "abcdefghijklmnopqrstuvwxyz";
+        StringBuilder target = new StringBuilder(source);
+        List<String> results = new LinkedList<>();
+        final int sourceLen = source.length();
+        final int dictLen = dict.length();
+        for (int si = 0; si < sourceLen; ++si) {
+            for (int di = 0; di < dictLen; ++di) {
+                if (source.charAt(si) == dict.charAt(di)) {
+                    continue;
                 }
-                ++j;
+                target.setCharAt(si,dict.charAt(di));
+                results.add(target.toString());
+                target.setCharAt(si,source.charAt(si));
             }
-            ++i;
         }
-        return wordsMap;
-    }
-
-    private boolean isConnected(String a,String b) {
-        final int wordLen = a.length();
-        if (a.equals(b) || wordLen != b.length()) {
-            return false;
-        }
-        int diffCount = 0;
-        for (int i = 0; i < wordLen; ++i) {
-            diffCount += a.charAt(i) == b.charAt(i) ? 0 : 1;
-        }
-        return diffCount == 1;
+        return results;
     }
 }
