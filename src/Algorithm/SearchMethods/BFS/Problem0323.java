@@ -10,52 +10,39 @@ public class Problem0323 {
         if (edges == null || edges.length == 0) {
             return n;
         }
-        Node[] graph = makeGraph(n,edges);
-        HashMap<Node, Boolean> visited = new HashMap<>();
-        n = 0;
-        for (Node v : graph) {
-            if (visited.containsKey(v) && visited.get(v)) {
-                continue;
-            }
-            bfs(v,visited);
-            ++n;
-        }
-        return n;
-    }
-
-    private void bfs(Node root,HashMap<Node, Boolean> visited) {
-        Queue<Node> q = new LinkedList<>();
-        visited.put(root,true);
-        q.add(root);
-        while (!q.isEmpty()) {
-            Node curNode = q.poll();
-            for (Node n : curNode.neighbors) {
-                if (visited.containsKey(n) && visited.get(n)) {
-                    continue;
-                }
-                q.add(n);
-                visited.put(n,true);
-            }
-        }
-    }
-
-    private Node[] makeGraph(int n,int[][] edges) {
-        Node[] graph = new Node[n];
+        HashMap<Integer, HashSet<Integer>> neighbors = new HashMap<>();
+        boolean[] visited = new boolean[n];
         for (int i = 0; i < n; ++i) {
-            graph[i] = new Node();
+            neighbors.put(i,new HashSet<>());
         }
         for (int[] e : edges) {
-            graph[e[0]].neighbors.add(graph[e[1]]);
-            graph[e[1]].neighbors.add(graph[e[0]]);
+            neighbors.get(e[0]).add(e[1]);
+            neighbors.get(e[1]).add(e[0]);
         }
-        return graph;
+        int count = 0;
+        for (int i = 0; i < n; ++i) {
+            if (visited[i]) {
+                continue;
+            }
+            bfs(i,neighbors,visited);
+            ++count;
+        }
+        return count;
     }
 
-    private static class Node {
-        private final HashSet<Node> neighbors;
-
-        Node() {
-            this.neighbors = new HashSet<>();
+    private void bfs(int root,HashMap<Integer, HashSet<Integer>> neighbors,boolean[] visited) {
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(root);
+        visited[root] = true;
+        while (!queue.isEmpty()) {
+            root = queue.poll();
+            for (int n : neighbors.get(root)) {
+                if (visited[n]) {
+                    continue;
+                }
+                queue.add(n);
+                visited[n] = true;
+            }
         }
     }
 }
