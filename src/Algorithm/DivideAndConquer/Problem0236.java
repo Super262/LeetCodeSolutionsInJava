@@ -1,24 +1,44 @@
 package Algorithm.DivideAndConquer;
 
+import java.util.ArrayList;
+
 public class Problem0236 {
     public TreeNode lowestCommonAncestor(TreeNode root,TreeNode p,TreeNode q) {
-        if (root == null || p == null || q == null) {
+        ArrayList<TreeNode> pPath = new ArrayList<>();
+        ArrayList<TreeNode> qPath = new ArrayList<>();
+        getPath(root,p,pPath);
+        if (pPath.isEmpty()) {
             return null;
         }
-        if (p == q) {
-            return p;
+        getPath(root,q,qPath);
+        if (qPath.isEmpty()) {
+            return null;
         }
-        if (p == root || q == root) {
-            return root;
+        int i = 0;
+        while (i < pPath.size() && i < qPath.size()) {
+            if (pPath.get(i) != qPath.get(i)) {
+                break;
+            }
+            ++i;
         }
-        TreeNode leftResult = lowestCommonAncestor(root.left,p,q);
-        TreeNode rightResult = lowestCommonAncestor(root.right,p,q);
-        if (leftResult != null && rightResult != null) {
-            return root;
+        return pPath.get(i - 1);
+    }
+
+    private boolean getPath(TreeNode root,TreeNode target,ArrayList<TreeNode> path) {
+        if (root == null || target == null) {
+            return false;
         }
-        if (leftResult != null) {
-            return leftResult;
+        path.add(root);
+        if (root == target) {
+            return true;
         }
-        return rightResult;
+        if (getPath(root.left,target,path)) {
+            return true;
+        }
+        if (getPath(root.right,target,path)) {
+            return true;
+        }
+        path.remove(path.size() - 1);
+        return false;
     }
 }
