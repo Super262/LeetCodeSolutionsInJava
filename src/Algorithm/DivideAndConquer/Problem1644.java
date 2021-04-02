@@ -1,44 +1,46 @@
 package Algorithm.DivideAndConquer;
 
-import java.util.ArrayList;
-
 public class Problem1644 {
     public TreeNode lowestCommonAncestor(TreeNode root,TreeNode p,TreeNode q) {
-        ArrayList<TreeNode> pPath = new ArrayList<>();
-        ArrayList<TreeNode> qPath = new ArrayList<>();
-        getPath(root,p,pPath);
-        if (pPath.isEmpty()) {
-            return null;
+        ResultPack lcaResult = helper(root,p,q);
+        if (lcaResult.pExisted && lcaResult.qExisted) {
+            return lcaResult.commonAncestor;
         }
-        getPath(root,q,qPath);
-        if (qPath.isEmpty()) {
-            return null;
-        }
-        int i = 0;
-        while (i < pPath.size() && i < qPath.size()) {
-            if (pPath.get(i) != qPath.get(i)) {
-                break;
-            }
-            ++i;
-        }
-        return pPath.get(i - 1);
+        return null;
     }
 
-    private boolean getPath(TreeNode root,TreeNode target,ArrayList<TreeNode> path) {
-        if (root == null || target == null) {
-            return false;
+    private ResultPack helper(TreeNode root,TreeNode p,TreeNode q) {
+        if (root == null || p == null || q == null) {
+            return new ResultPack(false,false,null);
         }
-        path.add(root);
-        if (root == target) {
-            return true;
+        ResultPack leftResultPack = helper(root.left,p,q);
+        ResultPack rightResultPack = helper(root.right,p,q);
+        boolean pExisted = root == p || leftResultPack.pExisted || rightResultPack.pExisted;
+        boolean qExisted = root == q || leftResultPack.qExisted || rightResultPack.qExisted;
+        if (root == p || root == q) {
+            return new ResultPack(pExisted,qExisted,root);
         }
-        if (getPath(root.left,target,path)) {
-            return true;
+        if (leftResultPack.commonAncestor != null && rightResultPack.commonAncestor != null) {
+            return new ResultPack(pExisted,qExisted,root);
         }
-        if (getPath(root.right,target,path)) {
-            return true;
+        if (leftResultPack.commonAncestor != null) {
+            return new ResultPack(pExisted,qExisted,leftResultPack.commonAncestor);
         }
-        path.remove(path.size() - 1);
-        return false;
+        if (rightResultPack.commonAncestor != null) {
+            return new ResultPack(pExisted,qExisted,rightResultPack.commonAncestor);
+        }
+        return new ResultPack(false,false,null);
+    }
+
+    private static class ResultPack {
+        private final boolean pExisted;
+        private final boolean qExisted;
+        private final TreeNode commonAncestor;
+
+        ResultPack(boolean pExisted,boolean qExisted,TreeNode commonAncestor) {
+            this.pExisted = pExisted;
+            this.qExisted = qExisted;
+            this.commonAncestor = commonAncestor;
+        }
     }
 }
