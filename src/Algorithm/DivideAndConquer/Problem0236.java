@@ -5,6 +5,9 @@ public class Problem0236 {
         if (root == null || p == null || q == null) {
             return null;
         }
+        if (p == q) {
+            return p;
+        }
         if (p == root || q == root) {
             return root;
         }
