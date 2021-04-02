@@ -1,4 +1,4 @@
-package Algorithm.SearchMethods.BFS;
+package Algorithm.DivideAndConquer;
 
 public class TreeNode {
     int val;

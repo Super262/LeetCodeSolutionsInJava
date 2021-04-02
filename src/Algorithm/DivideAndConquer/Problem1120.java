@@ -1,4 +1,4 @@
-package Algorithm.SearchMethods.BFS;
+package Algorithm.DivideAndConquer;
 
 public class Problem1120 {
     public double maximumAverageSubtree(TreeNode root) {
