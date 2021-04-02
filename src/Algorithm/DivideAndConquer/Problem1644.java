@@ -7,8 +7,11 @@ public class Problem1644 {
         ArrayList<TreeNode> pPath = new ArrayList<>();
         ArrayList<TreeNode> qPath = new ArrayList<>();
         getPath(root,p,pPath);
+        if (pPath.isEmpty()) {
+            return null;
+        }
         getPath(root,q,qPath);
-        if (pPath.isEmpty() || qPath.isEmpty()) {
+        if (qPath.isEmpty()) {
             return null;
         }
         int i = 0;
