@@ -1,57 +1,28 @@
 package Algorithm.SearchMethods.DFS;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Problem0090 {
     public List<List<Integer>> subsetsWithDup(int[] nums) {
-        Arrays.sort(nums);
-        List<List<Integer>> result = new LinkedList<>();
-        for (int i = 0; i <= nums.length; ++i) {
-            result.addAll(getCombinations(nums,0,i));
-        }
-        return result;
+        List<List<Integer>> results = new LinkedList<>();
+        int[] numsCopied = new int[nums.length];
+        System.arraycopy(nums,0,numsCopied,0,nums.length);
+        Arrays.sort(numsCopied);
+        helper(numsCopied,0,new LinkedList<>(),results);
+        return results;
     }
 
-    private List<List<Integer>> getCombinations(int[] nums,int start,int targetLength) {
-        List<List<Integer>> result = new LinkedList<>();
-        if (targetLength < 0 || targetLength > nums.length - start) {
-            return result;
-        } else if (targetLength == 0) {
-            LinkedList<Integer> tempResult = new LinkedList<>();
-            result.add(tempResult);
-        } else if (targetLength == nums.length - start) {
-            LinkedList<Integer> tempResult = new LinkedList<>();
-            for (int i = start; i < nums.length; ++i) {
-                tempResult.addLast(nums[i]);
+    private void helper(int[] nums,int startIndex,LinkedList<Integer> subset,List<List<Integer>> results) {
+        results.add(new LinkedList<>(subset));
+        for (int i = startIndex; i < nums.length; ++i) {
+            if (i > startIndex && nums[i] == nums[i - 1]) {
+                continue;
             }
-            result.add(tempResult);
-        } else {
-            HashSet<Integer> visited = new HashSet<>();
-            if (targetLength == 1) {
-                for (int i = start; i < nums.length; ++i) {
-                    if (!visited.contains(nums[i])) {
-                        visited.add(nums[i]);
-                        LinkedList<Integer> tempResult = new LinkedList<>();
-                        tempResult.addLast(nums[i]);
-                        result.add(tempResult);
-                    }
-                }
-            } else {
-                for (int i = start; i < nums.length; ++i) {
-                    if (!visited.contains(nums[i])) {
-                        visited.add(nums[i]);
-                        List<List<Integer>> postPart = getCombinations(nums,i + 1,targetLength - 1);
-                        for (List<Integer> l : postPart) {
-                            l.add(0,nums[i]);
-                        }
-                        result.addAll(postPart);
-                    }
-                }
-            }
+            subset.addLast(nums[i]);
+            helper(nums,i + 1,subset,results);
+            subset.removeLast();
         }
-        return result;
     }
 }
