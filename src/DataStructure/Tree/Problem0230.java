@@ -1,4 +1,4 @@
-package Algorithm.DivideAndConquer;
+package DataStructure.Tree;
 
 import java.util.Stack;
 
