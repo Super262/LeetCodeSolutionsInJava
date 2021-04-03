@@ -19,15 +19,25 @@ public class Problem0272 {
             moveUpper(upperStack);
         }
         for (int i = 0; i < k; ++i) {
-            if (lowerStack.isEmpty() || (!upperStack.isEmpty() && Math.abs((double) lowerStack.peek().val - target) > Math.abs((double) upperStack.peek().val - target))) {
-                result.add(upperStack.peek().val);
-                moveUpper(upperStack);
-            } else {
+            if (isLowerCloser(lowerStack,upperStack,target)) {
                 result.add(lowerStack.peek().val);
                 moveLower(lowerStack);
+            } else {
+                result.add(upperStack.peek().val);
+                moveUpper(upperStack);
             }
         }
         return result;
+    }
+
+    private boolean isLowerCloser(Stack<TreeNode> lowerStack,Stack<TreeNode> upperStack,double target) {
+        if (lowerStack.isEmpty()) {
+            return false;
+        }
+        if (upperStack.isEmpty()) {
+            return true;
+        }
+        return Math.abs((double) lowerStack.peek().val - target) < Math.abs((double) upperStack.peek().val - target);
     }
 
     private Stack<TreeNode> initializeStack(TreeNode root,double target) {
