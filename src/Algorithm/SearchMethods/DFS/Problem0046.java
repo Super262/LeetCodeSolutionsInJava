@@ -1,4 +1,4 @@
-package Algorithm.SearchMethods.BackTracking;
+package Algorithm.SearchMethods.DFS;
 
 import java.util.LinkedList;
 import java.util.List;

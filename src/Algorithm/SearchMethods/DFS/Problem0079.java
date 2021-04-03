@@ -1,4 +1,4 @@
-package Algorithm.SearchMethods.BackTracking;
+package Algorithm.SearchMethods.DFS;
 
 public class Problem0079 {
     public boolean exist(char[][] board,String word) {
