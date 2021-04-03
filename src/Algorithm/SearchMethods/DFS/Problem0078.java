@@ -16,13 +16,11 @@ public class Problem0078 {
     }
 
     private void helper(int[] nums,int index,List<Integer> subset,List<List<Integer>> results) {
-        if (index >= nums.length) {
-            results.add(new ArrayList<>(subset));
-            return;
+        results.add(new ArrayList<>(subset));
+        for (int i = index; i < nums.length; ++i) {
+            subset.add(nums[i]);
+            helper(nums,i + 1,subset,results);
+            subset.remove(subset.size() - 1);
         }
-        subset.add(nums[index]);
-        helper(nums,index + 1,subset,results);
-        subset.remove(subset.size() - 1);
-        helper(nums,index + 1,subset,results);
     }
 }
