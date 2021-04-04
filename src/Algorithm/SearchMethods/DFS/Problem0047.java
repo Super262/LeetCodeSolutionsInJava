@@ -1,48 +1,35 @@
 package Algorithm.SearchMethods.DFS;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Problem0047 {
     public List<List<Integer>> permuteUnique(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return new LinkedList<>();
-        } else {
-            return getResult(nums,0,nums.length - 1);
-        }
+        int[] numsCopied = new int[nums.length];
+        System.arraycopy(nums,0,numsCopied,0,nums.length);
+        Arrays.sort(numsCopied);
+        boolean[] visited = new boolean[nums.length];
+        List<List<Integer>> results = new LinkedList<>();
+        dfs(numsCopied,visited,new ArrayList<>(nums.length),results);
+        return results;
     }
 
-    private List<List<Integer>> getResult(int[] nums,int start,int end) {
-        List<List<Integer>> result = new LinkedList<>();
-        if (start > end) {
-            return result;
-        } else if (start == end) {
-            LinkedList<Integer> l = new LinkedList<>();
-            l.add(nums[start]);
-            result.add(l);
-        } else {
-            HashSet<Integer> visited = new HashSet<>();
-            for (int i = start; i <= end; ++i) {
-                if (!visited.contains(nums[i])) {
-                    visited.add(nums[i]);
-                    swap(nums,i,start);
-                    List<List<Integer>> part = getResult(nums,start + 1,end);
-                    swap(nums,i,start);
-                    for (List<Integer> l : part) {
-                        l.add(0,nums[i]);
-                        result.add(l);
-                    }
-                }
+    private void dfs(int[] nums,boolean[] visited,ArrayList<Integer> permutation,List<List<Integer>> results) {
+        if (permutation.size() == nums.length) {
+            results.add(new ArrayList<>(permutation));
+            return;
+        }
+        for (int i = 0; i < nums.length; ++i) {
+            if (visited[i] || (i > 0 && nums[i - 1] == nums[i] && !visited[i - 1])) {
+                continue;
             }
+            visited[i] = true;
+            permutation.add(nums[i]);
+            dfs(nums,visited,permutation,results);
+            permutation.remove(permutation.size() - 1);
+            visited[i] = false;
         }
-
-        return result;
-    }
-
-    private void swap(int[] nums,int a,int b) {
-        int temp = nums[a];
-        nums[a] = nums[b];
-        nums[b] = temp;
     }
 }
