@@ -14,7 +14,7 @@ public class Problem0212 {
                 Trie currentNode = root.children[board[y][x] - 'a'];
                 if (currentNode != null) {
                     visited[y][x] = true;
-                    dfsToSearch(currentNode,board,visited,y,x,directions,results);
+                    dfsToSearchAndPrune(currentNode,board,visited,y,x,directions,results);
                     visited[y][x] = false;
                 }
             }
@@ -39,23 +39,23 @@ public class Problem0212 {
         }
         Trie currentNode = root;
         for (int i = 0; i < word.length(); ++i) {
-            char ch = word.charAt(i);
-            if (currentNode.children[ch - 'a'] == null) {
-                currentNode.children[ch - 'a'] = new Trie();
+            int chOrder = word.charAt(i) - 'a';
+            if (currentNode.children[chOrder] == null) {
+                currentNode.children[chOrder] = new Trie();
             }
-            currentNode = currentNode.children[ch - 'a'];
+            currentNode = currentNode.children[chOrder];
         }
         currentNode.isWord = true;
         currentNode.wordValue = word;
     }
 
-    private void dfsToSearch(Trie root,char[][] board,boolean[][] visited,int startY,int startX,int[][] directions,List<String> results) {
-        if (root == null) {
-            return;
-        }
+    private boolean dfsToSearchAndPrune(Trie root,char[][] board,boolean[][] visited,int startY,int startX,int[][] directions,List<String> results) {
         if (root.isWord) {
             results.add(root.wordValue);
             root.isWord = false;  // 避免产生重复的搜索结果
+            if (countNull(root.children) == root.children.length) {
+                return true;
+            }
         }
         for (int[] d : directions) {
             int nextY = startY + d[0];
@@ -63,10 +63,28 @@ public class Problem0212 {
             if (nextY < 0 || nextY >= board.length || nextX < 0 || nextX >= board[0].length || visited[nextY][nextX]) {
                 continue;
             }
+            int chOrder = board[nextY][nextX] - 'a';
+            if (root.children[chOrder] == null) {
+                continue;
+            }
             visited[nextY][nextX] = true;
-            dfsToSearch(root.children[board[nextY][nextX] - 'a'],board,visited,nextY,nextX,directions,results);
+            if (dfsToSearchAndPrune(root.children[chOrder],board,visited,nextY,nextX,directions,results)) {
+                root.children[chOrder] = null;
+            }
             visited[nextY][nextX] = false;
         }
+        return countNull(root.children) == root.children.length;
+    }
+
+    private int countNull(Trie[] children) {
+        int nullCount = 0;
+        for (Trie child : children) {
+            if (child != null) {
+                continue;
+            }
+            ++nullCount;
+        }
+        return nullCount;
     }
 
     private static class Trie {
