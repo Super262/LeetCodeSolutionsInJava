@@ -5,12 +5,12 @@ import java.util.List;
 
 public class Problem0017 {
     public List<String> letterCombinations(String digits) {
-        List<String> result = new LinkedList<>();
+        List<String> results = new LinkedList<>();
         if (digits != null && !digits.isEmpty()) {
             final String[] keys = {"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
-            doCombination(keys,new StringBuilder(digits.length()),digits,result);
+            doCombination(keys,new StringBuilder(digits.length()),digits,results);
         }
-        return result;
+        return results;
     }
 
     private void doCombination(String[] keys,StringBuilder prefix,final String digits,List<String> result) {
