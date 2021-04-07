@@ -1,4 +1,4 @@
-package Others;
+package DataStructure.Heap;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
