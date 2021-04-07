@@ -1,4 +1,4 @@
-package DataStructure.Heap;
+package Algorithm.Sorting;
 
 public class Problem0973 {
     public int[][] kClosest(int[][] points,int k) {
