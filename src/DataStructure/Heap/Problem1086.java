@@ -1,8 +1,6 @@
 package DataStructure.Heap;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class Problem1086 {
     public int[][] highFive(int[][] items) {
@@ -29,6 +27,7 @@ public class Problem1086 {
             result[resultTop][1] = sum / 5;
             ++resultTop;
         }
+        Arrays.sort(result,Comparator.comparingInt(o -> o[0]));
         return result;
     }
 }
