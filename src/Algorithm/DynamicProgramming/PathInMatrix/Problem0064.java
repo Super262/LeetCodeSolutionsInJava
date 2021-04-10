@@ -7,19 +7,23 @@ public class Problem0064 {
         }
         final int height = grid.length;
         final int width = grid[0].length;
-        int[][] dp = new int[height][width];
+        int[][] dp = new int[2][width];
         dp[0][0] = grid[0][0];
-        for (int y = 1; y < height; ++y) {
-            dp[y][0] = dp[y - 1][0] + grid[y][0];
-        }
-        for (int x = 1; x < width; ++x) {
-            dp[0][x] = dp[0][x - 1] + grid[0][x];
-        }
-        for (int y = 1; y < height; ++y) {
-            for (int x = 1; x < width; ++x) {
-                dp[y][x] = Math.min(dp[y - 1][x] + grid[y][x],dp[y][x - 1] + grid[y][x]);
+        for (int i = 0; i < height; ++i) {
+            int newI = i % 2;
+            int oldI = (i - 1) % 2;
+            for (int j = 0; j < width; ++j) {
+                if (i == 0 && j == 0) {
+                    continue;
+                } else if (i != 0 && j != 0) {
+                    dp[newI][j] = Math.min(dp[newI][j - 1],dp[oldI][j]) + grid[i][j];
+                } else if (i != 0) {
+                    dp[newI][j] = dp[oldI][j] + grid[i][j];
+                } else {
+                    dp[newI][j] = dp[newI][j - 1] + grid[i][j];
+                }
             }
         }
-        return dp[height - 1][width - 1];
+        return dp[(height - 1) % 2][width - 1];
     }
 }
