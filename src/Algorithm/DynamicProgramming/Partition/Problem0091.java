@@ -3,11 +3,11 @@ package Algorithm.DynamicProgramming.Partition;
 public class Problem0091 {
     public int numDecodings(String s) {
         if (s == null) {
-            return 1;
+            return 0;
         }
         int sLen = s.length();
         if (sLen == 0) {
-            return 1;
+            return 0;
         }
         int f0 = 1;
         int f1 = s.charAt(0) == '0' ? 0 : 1;
