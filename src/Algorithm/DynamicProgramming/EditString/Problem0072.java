@@ -10,22 +10,22 @@ public class Problem0072 {
         if (wLen2 == 0) {
             return wLen1;
         }
-        int[][] dp = new int[wLen1 + 1][wLen2 + 1];
-        for (int l1 = 1; l1 <= wLen1; ++l1) {
-            dp[l1][0] = l1;
-        }
+        int[][] dp = new int[2][wLen2 + 1];
         for (int l2 = 1; l2 <= wLen2; ++l2) {
             dp[0][l2] = l2;
         }
         for (int l1 = 1; l1 <= wLen1; ++l1) {
+            int newL1 = l1 % 2;
+            int oldL1 = (l1 - 1) % 2;
+            dp[newL1][0] = l1;
             for (int l2 = 1; l2 <= wLen2; ++l2) {
                 if (word1.charAt(l1 - 1) == word2.charAt(l2 - 1)) {
-                    dp[l1][l2] = Math.min(dp[l1 - 1][l2 - 1],Math.min(dp[l1 - 1][l2] + 1,dp[l1][l2 - 1] + 1));
+                    dp[newL1][l2] = Math.min(dp[oldL1][l2 - 1],Math.min(dp[oldL1][l2] + 1,dp[newL1][l2 - 1] + 1));
                 } else {
-                    dp[l1][l2] = Math.min(dp[l1 - 1][l2 - 1] + 1,Math.min(dp[l1 - 1][l2] + 1,dp[l1][l2 - 1] + 1));
+                    dp[newL1][l2] = Math.min(dp[oldL1][l2 - 1] + 1,Math.min(dp[oldL1][l2] + 1,dp[newL1][l2 - 1] + 1));
                 }
             }
         }
-        return dp[wLen1][wLen2];
+        return dp[wLen1 % 2][wLen2];
     }
 }
