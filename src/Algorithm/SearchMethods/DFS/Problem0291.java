@@ -31,7 +31,7 @@ public class Problem0291 {
             }
             usedWords.add(word);
             chToWord.put(ch,word);
-            if (helper(pattern,patternStart + 1,str,strStart + word.length(),chToWord,usedWords)) {
+            if (helper(pattern,patternStart + 1,str,strStart + len,chToWord,usedWords)) {
                 return true;
             }
             usedWords.remove(word);
