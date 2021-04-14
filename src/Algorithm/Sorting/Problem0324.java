@@ -5,6 +5,7 @@ public class Problem0324 {
         if (nums == null || nums.length == 0) {
             return;
         }
+        // 选取中位数或者中位数左侧较小的元素相当于选取第(nums.length - 1) / 2 + 1个元素（从1开始计数）
         int smallerMid = partitionBySmallerMid(nums,0,nums.length - 1,(nums.length - 1) / 2 + 1);
         int[] answer = new int[nums.length];
         for (int i = 0; i < nums.length; ++i) {
