@@ -1,4 +1,4 @@
-package DataStructure.LinkedList;
+package Algorithm.DoublePointers;
 
 public class Problem0160 {
     public ListNode getIntersectionNode(ListNode headA,ListNode headB) {
