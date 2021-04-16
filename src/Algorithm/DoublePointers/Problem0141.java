@@ -2,35 +2,19 @@ package Algorithm.DoublePointers;
 
 public class Problem0141 {
     public boolean hasCycle(ListNode head) {
-        if (head == null) {
+        // 相当于追击问题
+        if (head == null || head.next == null) {
             return false;
         }
-        ListNode slowP = head;
-        ListNode fastP = head;
-        do {
-            slowP = slowP.next;
-            if (slowP == null) {
+        ListNode pSlow = head;
+        ListNode pFast = head.next;
+        while (pSlow != pFast) {
+            if (pFast == null || pFast.next == null) {
                 return false;
             }
-            fastP = fastP.next;
-            if (fastP == null) {
-                return false;
-            }
-            fastP = fastP.next;
-            if (fastP == null) {
-                return false;
-            }
-        } while (slowP != fastP);
-        return true;
-    }
-
-    private static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-            next = null;
+            pSlow = pSlow.next;
+            pFast = pFast.next.next;
         }
+        return true;
     }
 }
