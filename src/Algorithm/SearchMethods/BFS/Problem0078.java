@@ -1,6 +1,7 @@
 package Algorithm.SearchMethods.BFS;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Problem0078 {
@@ -8,6 +9,7 @@ public class Problem0078 {
         if (nums == null || nums.length == 0) {
             return new ArrayList<>(0);
         }
+        Arrays.sort(nums);
         List<List<Integer>> queue = new ArrayList<>((int) Math.pow(2,nums.length));
         queue.add(new ArrayList<>());
         int index = 0;
