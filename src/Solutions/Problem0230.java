@@ -1,33 +1,27 @@
 package Solutions;
 
-import java.util.Stack;
-
 public class Problem0230 {
+    private int answer = -1;
+    private int K;
+
     public int kthSmallest(TreeNode root,int k) {
+        K = k;
+        dfs(root);
+        return answer;
+    }
+
+    private boolean dfs(TreeNode root) {
         if (root == null) {
-            return -1;
+            return false;
         }
-        Stack<TreeNode> stack = new Stack<>();
-        TreeNode currentNode = root;
-        while (currentNode != null) {
-            stack.push(currentNode);
-            currentNode = currentNode.left;
+        if (dfs(root.left)) {
+            return true;
         }
-        for (int i = 0; i < k - 1; ++i) {
-            currentNode = stack.peek();
-            if (currentNode.right != null) {
-                currentNode = currentNode.right;
-                while (currentNode != null) {
-                    stack.push(currentNode);
-                    currentNode = currentNode.left;
-                }
-            } else {
-                currentNode = stack.pop();
-                while (!stack.isEmpty() && stack.peek().right == currentNode) {
-                    currentNode = stack.pop();
-                }
-            }
+        --K;
+        if (K == 0) {
+            answer = root.val;
+            return true;
         }
-        return stack.peek().val;
+        return dfs(root.right);
     }
 }
