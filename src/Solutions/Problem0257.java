@@ -1,46 +1,34 @@
 package Solutions;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Problem0257 {
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> result = new LinkedList<>();
-        if (root != null) {
-            StringBuilder tempValue = new StringBuilder(String.valueOf(root.val));
-            if (root.left != null || root.right != null) {
-                List<String> postPart = binaryTreePaths(root.left);
-                postPart.addAll(binaryTreePaths(root.right));
-                tempValue.append("->");
-                final int initialLen = tempValue.length();
-                for (String s : postPart) {
-                    tempValue.append(s);
-                    result.add(tempValue.toString());
-                    tempValue.setLength(initialLen);
-                }
-            } else {
-                result.add(tempValue.toString());
-            }
-        }
+        List<Integer> path = new ArrayList<>();
+        dfs(root,path,result);
         return result;
     }
 
-    private static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode() {
+    void dfs(final TreeNode root,List<Integer> path,List<String> result) {
+        if (root == null) {
+            return;
         }
-
-        TreeNode(int val) {
-            this.val = val;
+        path.add(root.val);
+        if (root.left == null && root.right == null) {
+            StringBuilder temp = new StringBuilder(String.valueOf(path.get(0)));
+            for (int i = 1; i < path.size(); ++i) {
+                temp.append("->");
+                temp.append(path.get(i));
+            }
+            result.add(temp.toString());
+            path.remove(path.size() - 1);
+            return;
         }
-
-        TreeNode(int val,TreeNode left,TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
+        dfs(root.left,path,result);
+        dfs(root.right,path,result);
+        path.remove(path.size() - 1);
     }
 }
