@@ -20,9 +20,9 @@ public class Problem0273 {
         return res.toString();
     }
 
-    private String[] nums1To19 = new String[]{"One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"};
-    private String[] nums20To90 = new String[]{"Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"};
-    private String[] nums1000 = new String[]{"Billion","Million","Thousand"};
+    private final String[] nums1To19 = new String[]{"One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"};
+    private final String[] nums20To90 = new String[]{"Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"};
+    private final String[] nums1000 = new String[]{"Billion","Million","Thousand"};
 
     private String convert1000(int x) {
         StringBuilder res = new StringBuilder();
