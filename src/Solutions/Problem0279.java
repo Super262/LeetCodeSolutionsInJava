@@ -1,41 +1,26 @@
 package Solutions;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class Problem0279 {
     public int numSquares(int n) {
-        List<Integer> squareList = generateSquares(n);
-        int[] dp = new int[n + 1];
-        dp[1] = 1;
-        int tempMin;
-        for (int digit = 2; digit <= n; ++digit) {
-            tempMin = Integer.MAX_VALUE;
-            for (int currentSquare : squareList) {
-                if (currentSquare > digit) {
-                    break;
-                } else if (currentSquare == digit) {
-                    tempMin = 1;
-                    break;
-                } else {
-                    tempMin = Math.min(tempMin,dp[digit - currentSquare] + 1);
-                }
-            }
-            dp[digit] = tempMin;
+        if (checkNum(n)) {
+            return 1;
         }
-        return dp[n];
+        for (int x = 1; x <= n / x; ++x) {
+            if (checkNum(n - x * x)) {
+                return 2;
+            }
+        }
+        while (n % 4 == 0) {
+            n /= 4;
+        }
+        if (n % 8 != 7) {
+            return 3;
+        }
+        return 4;
     }
 
-    private List<Integer> generateSquares(int upperbound) {
-        LinkedList<Integer> result = new LinkedList<>();
-        int num = 1;
-        while (result.isEmpty() || result.peekLast() < upperbound) {
-            result.addLast(num * num);
-            ++num;
-        }
-        if (result.peekLast() > upperbound) {
-            result.removeLast();
-        }
-        return result;
+    private boolean checkNum(int x) {
+        int r = (int) Math.sqrt(x);
+        return r * r == x;
     }
 }
