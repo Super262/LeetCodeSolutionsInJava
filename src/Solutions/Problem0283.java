@@ -3,21 +3,18 @@ package Solutions;
 public class Problem0283 {
     public void moveZeroes(int[] nums) {
         // Minimize the total number of operations!
-        if (nums == null || nums.length == 0) {
+        if (nums == null) {
             return;
         }
-        int left = 0;
-        int right = 0;
-        while (right < nums.length) {
-            if (nums[right] != 0) {
-                nums[left] = nums[right];
-                ++left;
+        int k = 0;
+        for (int x : nums) {
+            if (x == 0) {
+                continue;
             }
-            ++right;
+            nums[k++] = x;
         }
-        while (left < nums.length) {
-            nums[left] = 0;
-            ++left;
+        while (k < nums.length) {
+            nums[k++] = 0;
         }
     }
 }
